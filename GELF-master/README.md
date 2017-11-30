@@ -1,9 +1,9 @@
-PlusOne Coin
+GELF
 ============
 
 https://GELF.org
 
-What is PlusOne Coin?
+What is GELF?
 ---------------------
 
 ...coming soon...
@@ -11,12 +11,13 @@ What is PlusOne Coin?
 License
 -------
 
-PlusOne Coin is released under the terms of the MIT license. See [COPYING](COPYING) for more
+GELF is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
 Credits
 -------
 
-PlusOneCoin was forked from Bitcoin Core
+GELF was kind of forked from Bitcoin Core, more specifically from PlusOneCoin
 * [bitcoin](https://github.com/bitcoin/bitcoin)
 * [CryptoCoderz](https://github.com/CryptoCoderz/Espers.git) HMQ1725
+* [PlusOneCoin](https://github.com/plusonecoin/plusonecoin)
