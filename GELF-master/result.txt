@@ -1,0 +1,191 @@
+Binary file ./src/qt/libbitcoinqt.a matches
+Binary file ./src/qt/qt_libbitcoinqt_a-intro.o matches
+Binary file ./src/qt/test/test_bitcoin-qt matches
+Binary file ./src/qt/qt_libbitcoinqt_a-qrc_bitcoin_locale.o matches
+./src/qt/locale/bitcoin_zh_CN.ts:830:        <source>Welcome</source>
+./src/qt/locale/bitcoin_zh_CN.ts:834:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_zh_CN.ts:1698:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_el_GR.ts:562:        <source>Welcome</source>
+./src/qt/locale/bitcoin_es_CO.ts:204:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_sl_SI.qm matches
+./src/qt/locale/bitcoin_th_TH.ts:554:        <source>Welcome</source>
+./src/qt/locale/bitcoin_th_TH.ts:558:        <source>Welcome to %1.</source>
+Binary file ./src/qt/locale/bitcoin_ka.qm matches
+./src/qt/locale/bitcoin_ku_IQ.ts:120:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_af.qm matches
+Binary file ./src/qt/locale/bitcoin_nb.qm matches
+Binary file ./src/qt/locale/bitcoin_he.qm matches
+./src/qt/locale/bitcoin_en_GB.ts:606:        <source>Welcome</source>
+./src/qt/locale/bitcoin_en_GB.ts:607:        <translation>Welcome</translation>
+./src/qt/locale/bitcoin_en_GB.ts:610:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_en_GB.ts:611:        <translation>Welcome to %1.</translation>
+./src/qt/locale/bitcoin_en_GB.ts:1272:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_en_GB.ts:1273:        <translation>Welcome to the %1 RPC console.</translation>
+Binary file ./src/qt/locale/bitcoin_et.qm matches
+./src/qt/locale/bitcoin_fa.ts:730:        <source>Welcome</source>
+./src/qt/locale/bitcoin_fa.ts:734:        <source>Welcome to %1.</source>
+Binary file ./src/qt/locale/bitcoin_nl.qm matches
+./src/qt/locale/bitcoin_es_DO.ts:412:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_ar.qm matches
+Binary file ./src/qt/locale/bitcoin_ca@valencia.qm matches
+Binary file ./src/qt/locale/bitcoin_ja.qm matches
+Binary file ./src/qt/locale/bitcoin_da.qm matches
+./src/qt/locale/bitcoin_fr_FR.ts:578:        <source>Welcome</source>
+./src/qt/locale/bitcoin_fr_FR.ts:582:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_en.ts:1057:        <source>Welcome</source>
+./src/qt/locale/bitcoin_en.ts:1058:        <translation>Welcome</translation>
+./src/qt/locale/bitcoin_en.ts:1062:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_en.ts:2229:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_he.ts:532:        <source>Welcome</source>
+./src/qt/locale/bitcoin_he.ts:536:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_sl_SI.ts:510:        <source>Welcome</source>
+./src/qt/locale/bitcoin_sl_SI.ts:514:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_es.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_es.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_es.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_gl.qm matches
+Binary file ./src/qt/locale/bitcoin_vi_VN.qm matches
+./src/qt/locale/bitcoin_vi_VN.ts:470:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ar.ts:764:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ar.ts:768:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_ca.ts:834:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ca.ts:838:        <source>Welcome to %1.</source>
+Binary file ./src/qt/locale/bitcoin_ca.qm matches
+./src/qt/locale/bitcoin_fi.ts:542:        <source>Welcome</source>
+./src/qt/locale/bitcoin_fi.ts:546:        <source>Welcome to %1.</source>
+Binary file ./src/qt/locale/bitcoin_fr_CA.qm matches
+./src/qt/locale/bitcoin_pt_PT.ts:766:        <source>Welcome</source>
+./src/qt/locale/bitcoin_pt_PT.ts:770:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_pt_PT.ts:1469:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_cy.ts:256:        <source>Welcome</source>
+./src/qt/locale/bitcoin_af.ts:560:        <source>Welcome</source>
+./src/qt/locale/bitcoin_af.ts:564:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_lt.ts:368:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_ro.qm matches
+./src/qt/locale/bitcoin_gl.ts:396:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_be_BY.qm matches
+./src/qt/locale/bitcoin_hr.ts:478:        <source>Welcome</source>
+./src/qt/locale/bitcoin_fr_CA.ts:68:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_en.qm matches
+Binary file ./src/qt/locale/bitcoin_ca_ES.qm matches
+./src/qt/locale/bitcoin_da.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_da.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_da.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_bg.ts:790:        <source>Welcome</source>
+./src/qt/locale/bitcoin_bg.ts:794:        <source>Welcome to %1.</source>
+Binary file ./src/qt/locale/bitcoin_uk.qm matches
+./src/qt/locale/bitcoin_be_BY.ts:674:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_es_ES.qm matches
+./src/qt/locale/bitcoin_pl.ts:802:        <source>Welcome</source>
+./src/qt/locale/bitcoin_pl.ts:806:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_pl.ts:1600:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_id_ID.qm matches
+Binary file ./src/qt/locale/bitcoin_hr.qm matches
+./src/qt/locale/bitcoin_es_ES.ts:830:        <source>Welcome</source>
+./src/qt/locale/bitcoin_es_ES.ts:834:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_es_ES.ts:1644:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_uk.ts:566:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_bg.qm matches
+Binary file ./src/qt/locale/bitcoin_ta.qm matches
+./src/qt/locale/bitcoin_hu.ts:482:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_lv_LV.qm matches
+Binary file ./src/qt/locale/bitcoin_ru.qm matches
+./src/qt/locale/bitcoin_de.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_de.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_de.ts:1712:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_lt.qm matches
+./src/qt/locale/bitcoin_nb.ts:614:        <source>Welcome</source>
+./src/qt/locale/bitcoin_nb.ts:618:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_zh_TW.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_zh_TW.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_zh_TW.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_ca@valencia.ts:742:        <source>Welcome</source>
+./src/qt/locale/bitcoin_sq.ts:384:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_cy.qm matches
+Binary file ./src/qt/locale/bitcoin_sq.qm matches
+./src/qt/locale/bitcoin_ro_RO.ts:510:        <source>Welcome</source>
+./src/qt/locale/bitcoin_fr.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_fr.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_fr.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_es.qm matches
+Binary file ./src/qt/locale/bitcoin_it.qm matches
+./src/qt/locale/bitcoin_ja.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ja.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_ja.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_ka.ts:412:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ta.ts:224:        <source>Welcome</source>
+./src/qt/locale/bitcoin_sv.ts:755:        <source>Welcome</source>
+./src/qt/locale/bitcoin_sv.ts:759:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_sv.ts:1485:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_nl.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_nl.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_nl.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_tr.qm matches
+./src/qt/locale/bitcoin_es_CL.ts:317:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_et_EE.qm matches
+./src/qt/locale/bitcoin_ca_ES.ts:834:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ca_ES.ts:838:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_it.ts:806:        <source>Welcome</source>
+./src/qt/locale/bitcoin_it.ts:810:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_it.ts:1621:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_th_TH.qm matches
+./src/qt/locale/bitcoin_ro.ts:388:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ko_KR.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ko_KR.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_ko_KR.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_uz@Cyrl.qm matches
+./src/qt/locale/bitcoin_ru.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_ru.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_ru.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_pam.ts:288:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_zh_CN.qm matches
+Binary file ./src/qt/locale/bitcoin_el.qm matches
+Binary file ./src/qt/locale/bitcoin_fi.qm matches
+./src/qt/locale/bitcoin_et_EE.ts:272:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_pl.qm matches
+Binary file ./src/qt/locale/bitcoin_eo.qm matches
+Binary file ./src/qt/locale/bitcoin_zh_TW.qm matches
+./src/qt/locale/bitcoin_pt_BR.ts:838:        <source>Welcome</source>
+./src/qt/locale/bitcoin_pt_BR.ts:842:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_pt_BR.ts:1712:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_tr.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_tr.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_tr.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_pam.qm matches
+Binary file ./src/qt/locale/bitcoin_es_CO.qm matches
+./src/qt/locale/bitcoin_id_ID.ts:722:        <source>Welcome</source>
+./src/qt/locale/bitcoin_lv_LV.ts:392:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_hu.qm matches
+Binary file ./src/qt/locale/bitcoin_pt_BR.qm matches
+Binary file ./src/qt/locale/bitcoin_fr_FR.qm matches
+Binary file ./src/qt/locale/bitcoin_sk.qm matches
+./src/qt/locale/bitcoin_cs.ts:842:        <source>Welcome</source>
+./src/qt/locale/bitcoin_cs.ts:846:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_cs.ts:1716:        <source>Welcome to the %1 RPC console.</source>
+Binary file ./src/qt/locale/bitcoin_ro_RO.qm matches
+Binary file ./src/qt/locale/bitcoin_pt_PT.qm matches
+./src/qt/locale/bitcoin_sk.ts:834:        <source>Welcome</source>
+./src/qt/locale/bitcoin_sk.ts:838:        <source>Welcome to %1.</source>
+./src/qt/locale/bitcoin_sk.ts:1697:        <source>Welcome to the %1 RPC console.</source>
+./src/qt/locale/bitcoin_eo.ts:534:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_de.qm matches
+Binary file ./src/qt/locale/bitcoin_el_GR.qm matches
+./src/qt/locale/bitcoin_uz@Cyrl.ts:428:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_sv.qm matches
+Binary file ./src/qt/locale/bitcoin_en_GB.qm matches
+Binary file ./src/qt/locale/bitcoin_cs.qm matches
+./src/qt/locale/bitcoin_et.ts:682:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_es_DO.qm matches
+Binary file ./src/qt/locale/bitcoin_fr.qm matches
+Binary file ./src/qt/locale/bitcoin_ku_IQ.qm matches
+Binary file ./src/qt/locale/bitcoin_ko_KR.qm matches
+./src/qt/locale/bitcoin_el.ts:76:        <source>Welcome</source>
+Binary file ./src/qt/locale/bitcoin_fa.qm matches
+Binary file ./src/qt/locale/bitcoin_es_CL.qm matches
+./src/qt/rpcconsole.cpp:730:    message(CMD_REPLY, (tr("Welcome to the %1 RPC console.").arg(tr(PACKAGE_NAME)) + "<br>" +
+./src/qt/forms/ui_intro.h:184:        Intro->setWindowTitle(QApplication::translate("Intro", "Welcome", 0));
+./src/qt/forms/ui_intro.h:185:        welcomeLabel->setText(QApplication::translate("Intro", "Welcome to %1.", 0));
+./src/qt/forms/intro.ui:14:   <string>Welcome</string>
+./src/qt/forms/intro.ui:23:      <string>Welcome to %1.</string>
+Binary file ./src/qt/qt_libbitcoinqt_a-rpcconsole.o matches
+Binary file ./src/qt/GELF-qt matches
