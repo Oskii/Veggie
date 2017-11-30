@@ -482,13 +482,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\PlusOneCoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\PlusOneCoin
-    // Mac: ~/Library/Application Support/PlusOneCoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\GELF
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\GELF
+    // Mac: ~/Library/Application Support/GELF
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "PlusOneCoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "GELF";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -498,7 +498,7 @@ boost::filesystem::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/PlusOneCoin";
+    return pathRet / "Library/Application Support/GELF";
 #else
     // Unix
     return pathRet / ".GELF";
@@ -848,9 +848,9 @@ std::string CopyrightHolders(const std::string& strPrefix)
 {
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
 
-    // Check for untranslated substitution to make sure PlusOneCoin copyright is not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("PlusOneCoin") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The PlusOneCoin developers";
+    // Check for untranslated substitution to make sure GELF copyright is not removed by accident
+    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("GELF") == std::string::npos) {
+        strCopyrightHolders += "\n" + strPrefix + "The GELF developers";
     }
     return strCopyrightHolders;
 }

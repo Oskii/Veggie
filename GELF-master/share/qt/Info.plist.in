@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>PlusOneCoin-Qt</string>
+  <string>GELF-Qt</string>
   
   <key>CFBundleName</key>
-  <string>PlusOneCoin-Qt</string>
+  <string>GELF-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.GELF.PlusOneCoin-Qt</string>
+  <string>org.GELF.GELF-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.GELF.PlusOneCoinPayment</string>
+      <string>org.GELF.GELFPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>GELF</string>
@@ -60,7 +60,7 @@
       <key>UTTypeIdentifier</key>
       <string>org.GELF.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>PlusOneCoin payment request</string>
+      <string>GELF payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
