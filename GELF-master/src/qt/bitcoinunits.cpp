@@ -40,9 +40,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case PIXI: return QString("PLUS1");
-    case mPIXI: return QString("mPLUS1");
-    case uPIXI: return QString::fromUtf8("μPLUS1");
+    case PIXI: return QString("PIXI");
+    case mPIXI: return QString("mPIXI");
+    case uPIXI: return QString::fromUtf8("μPIXI");
     default: return QString("???");
     }
 }
@@ -51,9 +51,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case PIXI: return QString("PlusOneCoins");
-    case mPIXI: return QString("Milli-PlusOneCoins (1 / 1" THIN_SP_UTF8 "000)");
-    case uPIXI: return QString("Micro-PlusOneCoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case PIXI: return QString("PIXI");
+    case mPIXI: return QString("Milli-PIXI (1 / 1" THIN_SP_UTF8 "000)");
+    case uPIXI: return QString("Micro-PIXI (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }

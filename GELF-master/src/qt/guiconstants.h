@@ -48,9 +48,9 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "PlusOneCoin"
-#define QAPP_ORG_DOMAIN "GELF.org"
-#define QAPP_APP_NAME_DEFAULT "PlusOneCoin-Qt"
-#define QAPP_APP_NAME_TESTNET "PlusOneCoin-Qt-testnet"
+#define QAPP_ORG_NAME "GELF"
+#define QAPP_ORG_DOMAIN "GELF.io"
+#define QAPP_APP_NAME_DEFAULT "GELF-Qt"
+#define QAPP_APP_NAME_TESTNET "GELF-Qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H
