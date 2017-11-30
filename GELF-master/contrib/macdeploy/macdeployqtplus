@@ -155,7 +155,7 @@ class FrameworkInfo(object):
 class ApplicationBundleInfo(object):
     def __init__(self, path):
         self.path = path
-        appName = "PlusOneCoin-Qt"
+        appName = "GELF-Qt"
         self.binaryPath = os.path.join(path, "Contents", "MacOS", appName)
         if not os.path.exists(self.binaryPath):
             raise RuntimeError("Could not find bundle binary for " + self.binaryPath)
@@ -607,7 +607,7 @@ else:
 
 # ------------------------------------------------
 
-target = os.path.join("dist", "PlusOneCoin-Qt.app")
+target = os.path.join("dist", "GELF-Qt.app")
 
 if verbose >= 2:
     print("+ Copying source bundle +")

@@ -24,7 +24,7 @@ In case you want to build the disk image with `make deploy` (.dmg / optional), y
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. Building with Qt5 is recommended.
 
-Build PlusOneCoin Core
+Build GELF Core
 ------------------------
 
 1. Clone the GELF source code and cd into `GELF`
@@ -53,19 +53,19 @@ Build PlusOneCoin Core
 Running
 -------
 
-PlusOneCoin Core is now available at `./src/GELFd`
+GELF Core is now available at `./src/GELFd`
 
 Before running, it's recommended you create an RPC configuration file.
 
-    echo -e "rpcuser=GELFrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/PlusOneCoin/GELF.conf"
+    echo -e "rpcuser=GELFrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/GELF/GELF.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/PlusOneCoin/GELF.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/GELF/GELF.conf"
 
 The first time you run GELFd, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/PlusOneCoin/debug.log
+    tail -f $HOME/Library/Application\ Support/GELF/debug.log
 
 Other commands:
 -------
