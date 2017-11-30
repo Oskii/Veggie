@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.GELF.PlusOneCoin-Qt";
+        return @"org.GELF.GELF-Qt";
     } else {
         return [self __bundleIdentifier];
     }
