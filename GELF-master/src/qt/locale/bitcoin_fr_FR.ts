@@ -218,7 +218,7 @@
         <translation>Réindexer les blocs sur le disque...</translation>
     </message>
     <message>
-        <source>Send coins to a PlusOneCoin address</source>
+        <source>Send coins to a GELF address</source>
         <translation>Envoyer des pièces à une adresse Bitcoin</translation>
     </message>
     <message>
@@ -270,8 +270,8 @@
         <translation>Crypter les clé privées qui appartiennent votre portefeuille</translation>
     </message>
     <message>
-        <source>Sign messages with your PlusOneCoin addresses to prove you own them</source>
-        <translation>Signer vos messages avec vos adresses PlusOneCoin pour prouver que vous les détenez</translation>
+        <source>Sign messages with your GELF addresses to prove you own them</source>
+        <translation>Signer vos messages avec vos adresses GELF pour prouver que vous les détenez</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -306,7 +306,7 @@
         <translation>&amp;Options de ligne de commande</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to PlusOneCoin network</source>
+        <source>%n active connection(s) to GELF network</source>
         <translation><numerusform>%n connexion active au réseau Bitcoin</numerusform><numerusform>%n connexions actives au réseau Bitcoin</numerusform></translation>
     </message>
     <message>
@@ -684,8 +684,8 @@
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically open the PlusOneCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Ouvrir le port du client PlusOneCoin automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
+        <source>Automatically open the GELF client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Ouvrir le port du client GELF automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -844,8 +844,8 @@
         <translation>Montant</translation>
     </message>
     <message>
-        <source>Enter a PlusOneCoin address (e.g. %1)</source>
-        <translation>Entrer une adresse PlusOneCoin (e.g. %1)</translation>
+        <source>Enter a GELF address (e.g. %1)</source>
+        <translation>Entrer une adresse GELF (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1662,8 +1662,8 @@
         <translation>Impossible de démarrer le serveur HTTP. Voir le journal de débogage pour plus de détails.</translation>
     </message>
     <message>
-        <source>PlusOneCoin Core</source>
-        <translation>PlusOneCoin Core</translation>
+        <source>GELF Core</source>
+        <translation>GELF Core</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

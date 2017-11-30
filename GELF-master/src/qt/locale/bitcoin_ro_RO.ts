@@ -154,7 +154,7 @@
         <translation>Se reindexează blocurile pe disc...</translation>
     </message>
     <message>
-        <source>Send coins to a PlusOneCoin address</source>
+        <source>Send coins to a GELF address</source>
         <translation>Trimite monede către o adresă Bitcoin</translation>
     </message>
     <message>
@@ -206,12 +206,12 @@
         <translation>Criptează cheile private ale portofelului dvs.</translation>
     </message>
     <message>
-        <source>Sign messages with your PlusOneCoin addresses to prove you own them</source>
-        <translation>Semnaţi mesaje cu adresa dvs. PlusOneCoin pentru a dovedi că vă aparţin</translation>
+        <source>Sign messages with your GELF addresses to prove you own them</source>
+        <translation>Semnaţi mesaje cu adresa dvs. GELF pentru a dovedi că vă aparţin</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PlusOneCoin addresses</source>
-        <translation>Verificaţi mesaje pentru a vă asigura că au fost semnate cu adresa PlusOneCoin specificată</translation>
+        <source>Verify messages to ensure they were signed with specified GELF addresses</source>
+        <translation>Verificaţi mesaje pentru a vă asigura că au fost semnate cu adresa GELF specificată</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -250,7 +250,7 @@
         <translation>Opţiuni linie de &amp;comandă</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to PlusOneCoin network</source>
+        <source>%n active connection(s) to GELF network</source>
         <translation><numerusform>%n conexiune activă către reţeaua Bitcoin</numerusform><numerusform>%n conexiuni active către reţeaua Bitcoin</numerusform><numerusform>%n de conexiuni active către reţeaua Bitcoin</numerusform></translation>
     </message>
     <message numerus="yes">
@@ -656,7 +656,7 @@
         <translation>Cheltuire rest neconfirmat</translation>
     </message>
     <message>
-        <source>Automatically open the PlusOneCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the GELF client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Deschide automat în router portul aferent clientului Bitcoin. Funcţionează doar dacă routerul duportă UPnP şi e activat.</translation>
     </message>
     <message>
@@ -664,8 +664,8 @@
         <translation>Mapare port folosind &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the PlusOneCoin network through a SOCKS5 proxy.</source>
-        <translation>Conectare la reţeaua PlusOneCoin printr-un proxy SOCKS.</translation>
+        <source>Connect to the GELF network through a SOCKS5 proxy.</source>
+        <translation>Conectare la reţeaua GELF printr-un proxy SOCKS.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -775,8 +775,8 @@
         <translation>Form</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the PlusOneCoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Informaţiile afişate pot fi neactualizate. Portofelul dvs. se sincronizează automat cu reţeaua PlusOneCoin după ce o conexiune este stabilită, dar acest proces nu a fost finalizat încă.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the GELF network after a connection is established, but this process has not completed yet.</source>
+        <translation>Informaţiile afişate pot fi neactualizate. Portofelul dvs. se sincronizează automat cu reţeaua GELF după ce o conexiune este stabilită, dar acest proces nu a fost finalizat încă.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -864,8 +864,8 @@
         <translation>Cantitate</translation>
     </message>
     <message>
-        <source>Enter a PlusOneCoin address (e.g. %1)</source>
-        <translation>Introduceţi o adresă PlusOneCoin (de exemplu %1)</translation>
+        <source>Enter a GELF address (e.g. %1)</source>
+        <translation>Introduceţi o adresă GELF (de exemplu %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1164,7 +1164,7 @@
         <translation>R&amp;efoloseşte o adresă de primire (nu este recomandat)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the PlusOneCoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the GELF network.</source>
         <translation>Un mesaj opţional de ataşat la cererea de plată, care va fi afişat cînd cererea este deschisă. Notă: Acest mesaj nu va fi trimis cu plata către reţeaua Bitcoin.</translation>
     </message>
     <message>
@@ -1384,7 +1384,7 @@
         <translation>Aceasta este o tranzacţie normală.</translation>
     </message>
     <message>
-        <source>The PlusOneCoin address to send the payment to</source>
+        <source>The GELF address to send the payment to</source>
         <translation>Adresa bitcoin către care se face plata</translation>
     </message>
     <message>
@@ -1412,7 +1412,7 @@
         <translation>Introduceţi eticheta pentru ca această adresa să fie introdusă în lista de adrese folosite</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the PlusOneCoin network.</source>
+        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the GELF network.</source>
         <translation>un mesaj a fost ataşat la bitcoin: URI care va fi stocat cu tranzacţia pentru referinţa dvs. Notă: Acest mesaj nu va fi trimis către reţeaua bitcoin.</translation>
     </message>
     <message>
@@ -1449,7 +1449,7 @@
         <translation>&amp;Semnează mesaj</translation>
     </message>
     <message>
-        <source>The PlusOneCoin address to sign the message with</source>
+        <source>The GELF address to sign the message with</source>
         <translation>Adresa cu care semnaţi mesajul</translation>
     </message>
     <message>
@@ -1481,7 +1481,7 @@
         <translation>Copiază semnatura curentă în clipboard-ul sistemului</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this PlusOneCoin address</source>
+        <source>Sign the message to prove you own this GELF address</source>
         <translation>Semnează mesajul pentru a dovedi ca deţineţi acestă adresă Bitcoin</translation>
     </message>
     <message>
@@ -1501,12 +1501,12 @@
         <translation>&amp;Verifică mesaj</translation>
     </message>
     <message>
-        <source>The PlusOneCoin address the message was signed with</source>
+        <source>The GELF address the message was signed with</source>
         <translation>Introduceţi o adresă Bitcoin</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified PlusOneCoin address</source>
-        <translation>Verificaţi mesajul pentru a vă asigura că a fost semnat cu adresa PlusOneCoin specificată</translation>
+        <source>Verify the message to ensure it was signed with the specified GELF address</source>
+        <translation>Verificaţi mesajul pentru a vă asigura că a fost semnat cu adresa GELF specificată</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1594,7 +1594,7 @@
         <translation>Rulează în fundal ca un demon şi acceptă comenzi</translation>
     </message>
     <message>
-        <source>PlusOneCoin Core</source>
+        <source>GELF Core</source>
         <translation>Nucleul Bitcoin</translation>
     </message>
     <message>

@@ -46,12 +46,12 @@
         <translation>Duke marr adresen</translation>
     </message>
     <message>
-        <source>These are your PlusOneCoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Këto janë PlusOneCoin adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
+        <source>These are your GELF addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Këto janë GELF adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
     </message>
     <message>
-        <source>These are your PlusOneCoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Këto janë PlusOneCoin adresat e juaja për të pranuar pagesa. Rekomandohet që gjithmon të përdorni një adresë të re për çdo transaksion.</translation>
+        <source>These are your GELF addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Këto janë GELF adresat e juaja për të pranuar pagesa. Rekomandohet që gjithmon të përdorni një adresë të re për çdo transaksion.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -784,7 +784,7 @@
         <translation>Opsionet:</translation>
     </message>
     <message>
-        <source>PlusOneCoin Core</source>
+        <source>GELF Core</source>
         <translation>Berthama Bitcoin</translation>
     </message>
     <message>

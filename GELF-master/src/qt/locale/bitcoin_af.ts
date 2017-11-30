@@ -62,11 +62,11 @@
         <translation>Ontvanger adresse</translation>
     </message>
     <message>
-        <source>These are your PlusOneCoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Hierdie is die adresse vanwaar u PlusOneCoin betalings stuur. U moet altyd die bedrag en die adres van die ontvanger nagaan voordat u enige munte stuur.</translation>
+        <source>These are your GELF addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Hierdie is die adresse vanwaar u GELF betalings stuur. U moet altyd die bedrag en die adres van die ontvanger nagaan voordat u enige munte stuur.</translation>
     </message>
     <message>
-        <source>These are your PlusOneCoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your GELF addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>Hierdie is die adresse waar u Bitcoins sal ontvang. Ons beveel aan dat u 'n nuwe adres kies vir elke transaksie</translation>
     </message>
     <message>
@@ -330,8 +330,8 @@
         <translation>Besig met herindeksering van blokke op hardeskyf...</translation>
     </message>
     <message>
-        <source>Send coins to a PlusOneCoin address</source>
-        <translation>Stuur munte na 'n PlusOneCoin adres</translation>
+        <source>Send coins to a GELF address</source>
+        <translation>Stuur munte na 'n GELF adres</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -378,12 +378,12 @@
         <translation>Kodifiseer die private sleutes wat aan jou beursie gekoppel is.</translation>
     </message>
     <message>
-        <source>Sign messages with your PlusOneCoin addresses to prove you own them</source>
-        <translation>Onderteken boodskappe met u PlusOneCoin adresse om u eienaarskap te bewys</translation>
+        <source>Sign messages with your GELF addresses to prove you own them</source>
+        <translation>Onderteken boodskappe met u GELF adresse om u eienaarskap te bewys</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified PlusOneCoin addresses</source>
-        <translation>Verifieër boodskappe om seker te maak dat dit met die gespesifiseerde PlusOneCoin adresse</translation>
+        <source>Verify messages to ensure they were signed with specified GELF addresses</source>
+        <translation>Verifieër boodskappe om seker te maak dat dit met die gespesifiseerde GELF adresse</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -948,8 +948,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>PlusOneCoin Core</source>
-        <translation>PlusOneCoin Kern</translation>
+        <source>GELF Core</source>
+        <translation>GELF Kern</translation>
     </message>
     <message>
         <source>Information</source>

@@ -158,8 +158,8 @@
         <translation>Otvori &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a PlusOneCoin address</source>
-        <translation>Pošalji novčiće na PlusOneCoin adresu</translation>
+        <source>Send coins to a GELF address</source>
+        <translation>Pošalji novčiće na GELF adresu</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
@@ -406,8 +406,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>PlusOneCoin Core</source>
-        <translation>PlusOneCoin Core</translation>
+        <source>GELF Core</source>
+        <translation>GELF Core</translation>
     </message>
     <message>
         <source>Information</source>

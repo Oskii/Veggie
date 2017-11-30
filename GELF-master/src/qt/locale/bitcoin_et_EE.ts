@@ -760,8 +760,8 @@
         <translation>Valikud:</translation>
     </message>
     <message>
-        <source>PlusOneCoin Core</source>
-        <translation>PlusOneCoin Core</translation>
+        <source>GELF Core</source>
+        <translation>GELF Core</translation>
     </message>
     <message>
         <source>Information</source>

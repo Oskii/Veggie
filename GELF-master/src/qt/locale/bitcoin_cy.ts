@@ -484,7 +484,7 @@
         <translation>Opsiynau:</translation>
     </message>
     <message>
-        <source>PlusOneCoin Core</source>
+        <source>GELF Core</source>
         <translation>Craidd Bitcoin</translation>
     </message>
     <message>

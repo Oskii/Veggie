@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>警告: 如果你將錢包加密後又忘記密碼，你就會&lt;b&gt;失去所有 PlusOneCoin 了&lt;/b&gt;！</translation>
+        <translation>警告: 如果你將錢包加密後又忘記密碼，你就會&lt;b&gt;失去所有 GELF 了&lt;/b&gt;！</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -310,8 +310,8 @@
         <translation>正在為磁碟區塊重建索引...</translation>
     </message>
     <message>
-        <source>Send coins to a PlusOneCoin address</source>
-        <translation>付款至一個 PlusOneCoin 位址</translation>
+        <source>Send coins to a GELF address</source>
+        <translation>付款至一個 GELF 位址</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -440,8 +440,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Enter a PlusOneCoin address (e.g. %1)</source>
-        <translation>輸入一個 PlusOneCoin 位址 (例如 %1)</translation>
+        <source>Enter a GELF address (e.g. %1)</source>
+        <translation>輸入一個 GELF 位址 (例如 %1)</translation>
     </message>
     <message>
         <source>%1 d</source>

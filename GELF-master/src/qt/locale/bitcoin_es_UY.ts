@@ -110,7 +110,7 @@
         <translation>Recibiendo direcciones</translation>
     </message>
     <message>
-        <source>Send coins to a PlusOneCoin address</source>
+        <source>Send coins to a GELF address</source>
         <translation>Enviar monedas a una dirección Bitcoin</translation>
     </message>
     <message>
