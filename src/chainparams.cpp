@@ -120,7 +120,7 @@ public:
         pchMessageStart[1] = 0xbd;
         pchMessageStart[2] = 0xbe;
         pchMessageStart[3] = 0xd8;
-        nDefaultPort = 22716; //maybe 22717
+        nDefaultPort = 22736; //maybe 22717
         nPruneAfterHeight = 100000;
         
         printf("MAIN NET ========================================================= \n");
