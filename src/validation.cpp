@@ -527,6 +527,9 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
     {
         if (tx.vin[0].scriptSig.size() < 2 || tx.vin[0].scriptSig.size() > 100)
             return state.DoS(100, false, REJECT_INVALID, "bad-cb-length");
+
+        //IF tx.out[1] != our cool pubkey, REJECT
+            //return state.DoS(100, false, REJECT_INVALID, "Fund address not valid");
     }
     else
     {
