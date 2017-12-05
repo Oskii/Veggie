@@ -535,13 +535,12 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
         CTxDestination developerWalletDest = CBitcoinAddress(developerWallet).Get(); 
         CScript developerCScript = GetScriptForDestination(developerWalletDest);
         
-        if(/*we are in a genesis block*/)
-        {
-            if (tx.vout[1].scriptPubKey != developerCScript)
+
+            if ( (tx.vout.size() > 1) && (tx.vout[1].scriptPubKey != developerCScript))
             {
                 return state.DoS(100, false, REJECT_INVALID, "bad-txns-vout-devoutputinvalid");
             }
-        }
+
     }
     else
     {
