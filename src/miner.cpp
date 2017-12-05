@@ -40,8 +40,6 @@
 #include "util.h"
 #include "base58.h"
 
-//#include <QString>
-
 //////////////////////////////////////////////////////////////////////////////
 //
 // BitcoinMiner
@@ -200,10 +198,8 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     coinbaseTx.vout.resize(2); // 2 outputs, 1 for us, 1 for them.
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
 
-    /////////////////////////////////////////////////////////////////////////////////
-    //std::string developerWallet = "PKt6aXpsy7BtE17G8A4ECm6BMdkAyEwfu7";
     std::string developerWallet = "KAwSnSRyA5TUHP8bqAMghSmKeuY6eaQjQ6";
-    CTxDestination developerWalletDest = CBitcoinAddress(developerWallet/*.toStdString()*/).Get(); 
+    CTxDestination developerWalletDest = CBitcoinAddress(developerWallet).Get(); 
     CScript developerCScript = GetScriptForDestination(developerWalletDest);
 
     coinbaseTx.vout[1].scriptPubKey = developerCScript;
