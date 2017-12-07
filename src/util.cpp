@@ -103,8 +103,8 @@ namespace boost {
 
 using namespace std;
 
-const char * const BITCOIN_CONF_FILENAME = "GELF.conf";
-const char * const BITCOIN_PID_FILENAME = "GELF.pid";
+const char * const BITCOIN_CONF_FILENAME = "Veggie.conf";
+const char * const BITCOIN_PID_FILENAME = "Veggie.pid";
 
 CCriticalSection cs_args;
 map<string, string> mapArgs;
@@ -482,13 +482,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\GELF
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\GELF
-    // Mac: ~/Library/Application Support/GELF
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\Veggie
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\Veggie
+    // Mac: ~/Library/Application Support/Veggie
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "GELF";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Veggie";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -498,10 +498,10 @@ boost::filesystem::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/GELF";
+    return pathRet / "Library/Application Support/Veggie";
 #else
     // Unix
-    return pathRet / ".GELF";
+    return pathRet / ".Veggie";
 #endif
 #endif
 }
@@ -848,9 +848,9 @@ std::string CopyrightHolders(const std::string& strPrefix)
 {
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
 
-    // Check for untranslated substitution to make sure GELF copyright is not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("GELF") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The GELF developers";
+    // Check for untranslated substitution to make sure Veggie copyright is not removed by accident
+    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Veggie") == std::string::npos) {
+        strCopyrightHolders += "\n" + strPrefix + "The Veggie developers";
     }
     return strCopyrightHolders;
 }

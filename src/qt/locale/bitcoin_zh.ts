@@ -107,7 +107,7 @@
         <translation>仅支付全额的%1</translation>
     </message>
     <message>
-        <source>Warning: Invalid GELF address</source>
+        <source>Warning: Invalid Veggie address</source>
         <translation>警告：比特币地址无效</translation>
     </message>
     </context>

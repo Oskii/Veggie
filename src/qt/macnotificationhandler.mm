@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.GELF.GELF-Qt";
+        return @"org.Veggie.Veggie-Qt";
     } else {
         return [self __bundleIdentifier];
     }

@@ -142,7 +142,7 @@
         <translation>Deschide &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a GELF address</source>
+        <source>Send coins to a Veggie address</source>
         <translation>Trimite monedele către o adresă Bitcoin</translation>
     </message>
     <message>
@@ -194,12 +194,12 @@
         <translation>Criptează cheile private care aparțin portofelului tău.</translation>
     </message>
     <message>
-        <source>Sign messages with your GELF addresses to prove you own them</source>
-        <translation>Semnează mesajele cu adresa ta de GELF pentru a face dovada că îți aparțin.</translation>
+        <source>Sign messages with your Veggie addresses to prove you own them</source>
+        <translation>Semnează mesajele cu adresa ta de Veggie pentru a face dovada că îți aparțin.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified GELF addresses</source>
-        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de GELF specificată.</translation>
+        <source>Verify messages to ensure they were signed with specified Veggie addresses</source>
+        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de Veggie specificată.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -748,8 +748,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>GELF Core</source>
-        <translation>GELF Core</translation>
+        <source>Veggie Core</source>
+        <translation>Veggie Core</translation>
     </message>
     <message>
         <source>Information</source>

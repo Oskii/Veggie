@@ -126,7 +126,7 @@
         <translation>Abrir &amp;URL...</translation>
     </message>
     <message>
-        <source>Send coins to a GELF address</source>
+        <source>Send coins to a Veggie address</source>
         <translation>Enviando monedas a una dirección de Bitcoin</translation>
     </message>
     <message>
@@ -296,8 +296,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>GELF Core</source>
-        <translation>GELF Core</translation>
+        <source>Veggie Core</source>
+        <translation>Veggie Core</translation>
     </message>
     <message>
         <source>Insufficient funds</source>

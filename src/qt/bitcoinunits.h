@@ -56,9 +56,9 @@ public:
      */
     enum Unit
     {
-        PIXI,
-        mPIXI,
-        uPIXI
+        VEGI,
+        mVEGI,
+        uVEGI
     };
 
     enum SeparatorStyle

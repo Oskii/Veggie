@@ -8,16 +8,16 @@ define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2017)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
 define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[PlusOneCoin]])
-AC_INIT([PlusOneCoin],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/bitcoin/bitcoin/issues],[GELF],[https://GELF.org/])
+AC_INIT([PlusOneCoin],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/bitcoin/bitcoin/issues],[Veggie],[https://Veggie.org/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
 AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=GELFd
-BITCOIN_GUI_NAME=GELF-qt
-BITCOIN_CLI_NAME=GELF-cli
-BITCOIN_TX_NAME=GELF-tx
+BITCOIN_DAEMON_NAME=Veggied
+BITCOIN_GUI_NAME=Veggie-qt
+BITCOIN_CLI_NAME=Veggie-cli
+BITCOIN_TX_NAME=Veggie-tx
 
 AC_CANONICAL_HOST
 
@@ -240,7 +240,7 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build bitcoin-cli GELF-tx (default=yes)])],
+  [build bitcoin-cli Veggie-tx (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -920,7 +920,7 @@ AC_MSG_CHECKING([whether to build bitcoind])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
 AC_MSG_RESULT($build_bitcoind)
 
-AC_MSG_CHECKING([whether to build utils (bitcoin-cli GELF-tx)])
+AC_MSG_CHECKING([whether to build utils (bitcoin-cli Veggie-tx)])
 AM_CONDITIONAL([BUILD_BITCOIN_UTILS], [test x$build_bitcoin_utils = xyes])
 AC_MSG_RESULT($build_bitcoin_utils)
 

@@ -66,11 +66,11 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += GELFd
+  bin_PROGRAMS += Veggied
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += GELF-cli GELF-tx
+  bin_PROGRAMS += Veggie-cli Veggie-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
@@ -359,7 +359,7 @@ if GLIBC_BACK_COMPAT
 libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 endif
 
-# cli: shared between GELF and bitcoin-qt
+# cli: shared between Veggie and bitcoin-qt
 libbitcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_cli_a_SOURCES = \
@@ -369,17 +369,17 @@ libbitcoin_cli_a_SOURCES = \
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# GELFd binary #
-GELFd_SOURCES = GELFd.cpp
-GELFd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-GELFd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-GELFd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# Veggied binary #
+Veggied_SOURCES = Veggied.cpp
+Veggied_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+Veggied_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+Veggied_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-GELFd_SOURCES += bitcoind-res.rc
+Veggied_SOURCES += bitcoind-res.rc
 endif
 
-GELFd_LDADD = \
+Veggied_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
@@ -392,38 +392,38 @@ GELFd_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-GELFd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) 
+Veggied_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) 
 
-# GELF binary #
-GELF_cli_SOURCES = GELF-cli.cpp
-GELF_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-GELF_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-GELF_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# Veggie binary #
+Veggie_cli_SOURCES = Veggie-cli.cpp
+Veggie_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+Veggie_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+Veggie_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-GELF_cli_SOURCES += GELF-cli-res.rc
+Veggie_cli_SOURCES += Veggie-cli-res.rc
 endif
 
-GELF_cli_LDADD = \
+Veggie_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-GELF_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+Veggie_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# GELF-tx binary #
-GELF_tx_SOURCES = GELF-tx.cpp
-GELF_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-GELF_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-GELF_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# Veggie-tx binary #
+Veggie_tx_SOURCES = Veggie-tx.cpp
+Veggie_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+Veggie_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+Veggie_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-GELF_tx_SOURCES += GELF-tx-res.rc
+Veggie_tx_SOURCES += Veggie-tx-res.rc
 endif
 
-GELF_tx_LDADD = \
+Veggie_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -431,7 +431,7 @@ GELF_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-GELF_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+Veggie_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #

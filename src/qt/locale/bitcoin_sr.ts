@@ -130,7 +130,7 @@
         <translation>Промени &amp;лозинку...</translation>
     </message>
     <message>
-        <source>Send coins to a GELF address</source>
+        <source>Send coins to a Veggie address</source>
         <translation>Пошаљите новац на bitcoin адресу</translation>
     </message>
     <message>

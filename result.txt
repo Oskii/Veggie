@@ -188,4 +188,4 @@ Binary file ./src/qt/locale/bitcoin_es_CL.qm matches
 ./src/qt/forms/intro.ui:14:   <string>Welcome</string>
 ./src/qt/forms/intro.ui:23:      <string>Welcome to %1.</string>
 Binary file ./src/qt/qt_libbitcoinqt_a-rpcconsole.o matches
-Binary file ./src/qt/GELF-qt matches
+Binary file ./src/qt/Veggie-qt matches

@@ -17,9 +17,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(PIXI);
-    unitlist.append(mPIXI);
-    unitlist.append(uPIXI);
+    unitlist.append(VEGI);
+    unitlist.append(mVEGI);
+    unitlist.append(uVEGI);
     return unitlist;
 }
 
@@ -27,9 +27,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case PIXI:
-    case mPIXI:
-    case uPIXI:
+    case VEGI:
+    case mVEGI:
+    case uVEGI:
         return true;
     default:
         return false;
@@ -40,9 +40,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case PIXI: return QString("PIXI");
-    case mPIXI: return QString("mPIXI");
-    case uPIXI: return QString::fromUtf8("μPIXI");
+    case VEGI: return QString("VEGI");
+    case mVEGI: return QString("mVEGI");
+    case uVEGI: return QString::fromUtf8("μVEGI");
     default: return QString("???");
     }
 }
@@ -51,9 +51,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case PIXI: return QString("PIXI");
-    case mPIXI: return QString("Milli-PIXI (1 / 1" THIN_SP_UTF8 "000)");
-    case uPIXI: return QString("Micro-PIXI (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case VEGI: return QString("VEGI");
+    case mVEGI: return QString("Milli-VEGI (1 / 1" THIN_SP_UTF8 "000)");
+    case uVEGI: return QString("Micro-VEGI (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
@@ -62,9 +62,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case PIXI:  return 100000000;
-    case mPIXI: return 100000;
-    case uPIXI: return 100;
+    case VEGI:  return 100000000;
+    case mVEGI: return 100000;
+    case uVEGI: return 100;
     default:   return 100000000;
     }
 }
@@ -73,9 +73,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case PIXI: return 8;
-    case mPIXI: return 5;
-    case uPIXI: return 2;
+    case VEGI: return 8;
+    case mVEGI: return 5;
+    case uVEGI: return 2;
     default: return 0;
     }
 }

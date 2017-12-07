@@ -48,9 +48,9 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "GELF"
-#define QAPP_ORG_DOMAIN "GELF.io"
-#define QAPP_APP_NAME_DEFAULT "GELF-Qt"
-#define QAPP_APP_NAME_TESTNET "GELF-Qt-testnet"
+#define QAPP_ORG_NAME "Veggie"
+#define QAPP_ORG_DOMAIN "Veggie.io"
+#define QAPP_APP_NAME_DEFAULT "Veggie-Qt"
+#define QAPP_APP_NAME_TESTNET "Veggie-Qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

@@ -484,7 +484,7 @@
         <translation>Opsiynau:</translation>
     </message>
     <message>
-        <source>GELF Core</source>
+        <source>Veggie Core</source>
         <translation>Craidd Bitcoin</translation>
     </message>
     <message>

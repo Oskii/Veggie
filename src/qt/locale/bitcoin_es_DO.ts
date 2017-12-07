@@ -142,7 +142,7 @@
         <translation>Reindexando bloques en disco...</translation>
     </message>
     <message>
-        <source>Send coins to a GELF address</source>
+        <source>Send coins to a Veggie address</source>
         <translation>Enviar monedas a una dirección Bitcoin</translation>
     </message>
     <message>
@@ -194,12 +194,12 @@
         <translation>Cifrar las claves privadas de su monedero</translation>
     </message>
     <message>
-        <source>Sign messages with your GELF addresses to prove you own them</source>
-        <translation>Firmar mensajes con sus direcciones GELF para demostrar la propiedad</translation>
+        <source>Sign messages with your Veggie addresses to prove you own them</source>
+        <translation>Firmar mensajes con sus direcciones Veggie para demostrar la propiedad</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified GELF addresses</source>
-        <translation>Verificar mensajes comprobando que están firmados con direcciones GELF concretas</translation>
+        <source>Verify messages to ensure they were signed with specified Veggie addresses</source>
+        <translation>Verificar mensajes comprobando que están firmados con direcciones Veggie concretas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -494,8 +494,8 @@
         <translation>Experto</translation>
     </message>
     <message>
-        <source>Automatically open the GELF client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente el puerto del cliente GELF en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
+        <source>Automatically open the Veggie client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente el puerto del cliente Veggie en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -589,8 +589,8 @@
         <translation>Desde</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the GELF network after a connection is established, but this process has not completed yet.</source>
-        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red GELF después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Veggie network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red Veggie después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -1019,7 +1019,7 @@
         <translation>Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this GELF address</source>
+        <source>Sign the message to prove you own this Veggie address</source>
         <translation>Firmar el mensaje para demostrar que se posee esta dirección Bitcoin</translation>
     </message>
     <message>
@@ -1039,8 +1039,8 @@
         <translation>&amp;Verificar mensaje</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified GELF address</source>
-        <translation>Verificar el mensaje para comprobar que fue firmado con la dirección GELF indicada</translation>
+        <source>Verify the message to ensure it was signed with the specified Veggie address</source>
+        <translation>Verificar el mensaje para comprobar que fue firmado con la dirección Veggie indicada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1123,7 +1123,7 @@
 </translation>
     </message>
     <message>
-        <source>GELF Core</source>
+        <source>Veggie Core</source>
         <translation>Núcleo de Bitcoin</translation>
     </message>
     <message>

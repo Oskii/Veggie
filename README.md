@@ -1,4 +1,4 @@
-GELF
+Veggie
 ============
 
 https://Veggie.io
@@ -19,7 +19,7 @@ information or see https://opensource.org/licenses/MIT.
 Credits
 -------
 
-Veggie was kind of forked from Bitcoin Core, more specifically from GELF
+Veggie was kind of forked from Bitcoin Core, more specifically from Veggie
 * [bitcoin](https://github.com/bitcoin/bitcoin)
 * [CryptoCoderz](https://github.com/CryptoCoderz/Espers.git) HMQ1725
-* [GELF](https://github.com/GELF/GELF)
+* [Veggie](https://github.com/Veggie/Veggie)

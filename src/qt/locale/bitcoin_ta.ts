@@ -708,8 +708,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>GELF Core</source>
-        <translation>GELF மையம்</translation>
+        <source>Veggie Core</source>
+        <translation>Veggie மையம்</translation>
     </message>
     <message>
         <source>(default: %u)</source>
