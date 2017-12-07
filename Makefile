@@ -274,13 +274,13 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/q/Desktop/VEGGIE/Veggie/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/a/Veggie/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = /usr/bin/ar
-AUTOCONF = ${SHELL} /home/q/Desktop/VEGGIE/Veggie/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/q/Desktop/VEGGIE/Veggie/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /home/q/Desktop/VEGGIE/Veggie/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /home/a/Veggie/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/a/Veggie/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /home/a/Veggie/build-aux/missing automake-1.15
 AWK = mawk
 BDB_CFLAGS = 
 BDB_CPPFLAGS = 
@@ -309,8 +309,8 @@ CLIENT_VERSION_MAJOR = 0
 CLIENT_VERSION_MINOR = 1
 CLIENT_VERSION_REVISION = 0
 COPYRIGHT_HOLDERS = The %s developers
-COPYRIGHT_HOLDERS_FINAL = The PlusOneCoin developers
-COPYRIGHT_HOLDERS_SUBSTITUTION = PlusOneCoin
+COPYRIGHT_HOLDERS_FINAL = The Veggie developers
+COPYRIGHT_HOLDERS_SUBSTITUTION = Veggie
 COPYRIGHT_YEAR = 2017
 CPP = gcc -E
 CPPFILT = /usr/bin/c++filt
@@ -374,7 +374,7 @@ LTLIBOBJS =
 LT_SYS_LIBRARY_PATH = 
 LUPDATE = /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
 MAINT = 
-MAKEINFO = ${SHELL} /home/q/Desktop/VEGGIE/Veggie/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/a/Veggie/build-aux/missing makeinfo
 MAKENSIS = 
 MANIFEST_TOOL = :
 MINIUPNPC_CPPFLAGS = 
@@ -394,8 +394,8 @@ OTOOL =
 OTOOL64 = 
 PACKAGE = Veggie
 PACKAGE_BUGREPORT = https://github.com/bitcoin/bitcoin/issues
-PACKAGE_NAME = PlusOneCoin
-PACKAGE_STRING = PlusOneCoin 0.1.0
+PACKAGE_NAME = Veggie
+PACKAGE_STRING = Veggie 0.1.0
 PACKAGE_TARNAME = Veggie
 PACKAGE_URL = https://Veggie.org/
 PACKAGE_VERSION = 0.1.0
@@ -415,7 +415,7 @@ PTHREAD_LIBS =
 PYTHON = /usr/bin/python3.5
 PYTHONPATH = 
 QR_CFLAGS = 
-QR_LIBS = 
+QR_LIBS = -lqrencode
 QTPLATFORM_CFLAGS = 
 QTPLATFORM_LIBS = 
 QTPRINT_CFLAGS = 
@@ -461,10 +461,10 @@ X11XCB_LIBS =
 XGETTEXT = /usr/bin/xgettext
 ZMQ_CFLAGS = 
 ZMQ_LIBS = -lzmq
-abs_builddir = /home/q/Desktop/VEGGIE/Veggie
-abs_srcdir = /home/q/Desktop/VEGGIE/Veggie
-abs_top_builddir = /home/q/Desktop/VEGGIE/Veggie
-abs_top_srcdir = /home/q/Desktop/VEGGIE/Veggie
+abs_builddir = /home/a/Veggie
+abs_srcdir = /home/a/Veggie
+abs_top_builddir = /home/a/Veggie
+abs_top_srcdir = /home/a/Veggie
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -496,7 +496,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/q/Desktop/VEGGIE/Veggie/build-aux/install-sh
+install_sh = ${SHELL} /home/a/Veggie/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -529,7 +529,7 @@ BITCOIN_CLI_BIN = $(top_builddir)/src/$(BITCOIN_CLI_NAME)$(EXEEXT)
 BITCOIN_WIN_INSTALLER = $(PACKAGE)-$(PACKAGE_VERSION)-win$(WINDOWS_BITS)-setup$(EXEEXT)
 empty := 
 space := $(empty) $(empty)
-OSX_APP = PlusOneCoin-Qt.app
+OSX_APP = Veggie-Qt.app
 OSX_VOLNAME = $(subst $(space),-,$(PACKAGE_NAME))
 OSX_DMG = $(OSX_VOLNAME).dmg
 OSX_BACKGROUND_SVG = background.svg
@@ -569,7 +569,7 @@ COVERAGE_INFO = baseline_filtered_combined.info baseline.info \
 
 OSX_APP_BUILT = $(OSX_APP)/Contents/PkgInfo $(OSX_APP)/Contents/Resources/empty.lproj \
   $(OSX_APP)/Contents/Resources/Veggie.icns $(OSX_APP)/Contents/Info.plist \
-  $(OSX_APP)/Contents/MacOS/PlusOneCoin-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
+  $(OSX_APP)/Contents/MacOS/Veggie-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
 
 APP_DIST_DIR = $(top_builddir)/dist
 APP_DIST_EXTRAS = $(APP_DIST_DIR)/.background/$(OSX_BACKGROUND_IMAGE) $(APP_DIST_DIR)/.DS_Store $(APP_DIST_DIR)/Applications
@@ -1132,7 +1132,7 @@ $(OSX_APP)/Contents/Resources/Veggie.icns: $(OSX_INSTALLER_ICONS)
 	$(MKDIR_P) $(@D)
 	$(INSTALL_DATA) $< $@
 
-$(OSX_APP)/Contents/MacOS/PlusOneCoin-Qt: $(BITCOIN_QT_BIN)
+$(OSX_APP)/Contents/MacOS/Veggie-Qt: $(BITCOIN_QT_BIN)
 	$(MKDIR_P) $(@D)
 	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $< $@
 
@@ -1159,7 +1159,7 @@ $(APP_DIST_DIR)/Applications:
 	@rm -f $@
 	@cd $(@D); $(LN_S) /Applications $(@F)
 
-$(APP_DIST_EXTRAS): $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/PlusOneCoin-Qt
+$(APP_DIST_EXTRAS): $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Veggie-Qt
 
 $(OSX_DMG): $(APP_DIST_EXTRAS)
 	$(GENISOIMAGE) -no-cache-inodes -D -l -probe -V "$(OSX_VOLNAME)" -no-pad -r -dir-mode 0755 -apple -o $@ dist
@@ -1173,7 +1173,7 @@ $(APP_DIST_DIR)/.background/$(OSX_BACKGROUND_IMAGE): $(OSX_BACKGROUND_IMAGE_DPIF
 $(APP_DIST_DIR)/.DS_Store: $(OSX_DSSTORE_GEN)
 	$(PYTHON) $< "$@" "$(OSX_VOLNAME)"
 
-$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/PlusOneCoin-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
+$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Veggie-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
 	INSTALLNAMETOOL=$(INSTALLNAMETOOL)  OTOOL=$(OTOOL) STRIP=$(STRIP) $(PYTHON) $(OSX_DEPLOY_SCRIPT) $(OSX_APP) -translations-dir=$(QT_TRANSLATION_DIR) -add-qt-tr $(OSX_QT_TRANSLATIONS) -verbose 2
 
 deploydir: $(APP_DIST_EXTRAS)

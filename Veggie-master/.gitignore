@@ -80,7 +80,7 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 Veggie-qt
-PlusOneCoin-Qt.app
+Veggie-Qt.app
 
 # Unit-tests
 Makefile.test
