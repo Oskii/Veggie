@@ -19,7 +19,7 @@ information or see https://opensource.org/licenses/MIT.
 Credits
 -------
 
-Veggie was kind of forked from Bitcoin Core, more specifically from Veggie
+Veggie was forked from Bitcoin Core, more specifically from PlusOneCoin
 * [bitcoin](https://github.com/bitcoin/bitcoin)
 * [CryptoCoderz](https://github.com/CryptoCoderz/Espers.git) HMQ1725
 * [Veggie](https://github.com/Veggie/Veggie)
