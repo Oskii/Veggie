@@ -137,6 +137,7 @@ public:
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.push_back(CDNSSeedData("45.32.79.230" /*Carrot*/, "207.246.105.211" /*Avocado*/));
+        vSeeds.push_back(CDNSSeedData("45.77.72.77" /*Brazil Seed 1*/, "45.63.111.147" /*Brazil Seed 2*/));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); //55
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
