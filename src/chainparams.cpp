@@ -20,7 +20,7 @@
 
 #include "chainparamsseeds.h"
 
-#define GENESIS_TIME 1512570045
+#define GENESIS_TIME 1512570046
 #define GENESIS_DIFFICULTY 0x1e7fffff
 
 void MineGenesisBlock(CBlock &genesis);
@@ -126,12 +126,12 @@ public:
         printf("MAIN NET ========================================================= \n");
 
         //genesis = CreateGenesisBlock(GENESIS_TIME, 2317582475, GENESIS_DIFFICULTY, 1, 50 * COIN);
-        genesis = CreateGenesisBlock(GENESIS_TIME, 2317751360, GENESIS_DIFFICULTY, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(GENESIS_TIME, 2317976953, GENESIS_DIFFICULTY, 1, 50 * COIN);
     	
         //MineGenesisBlock(genesis);
     	
     	consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000068d17689e464dadb839878742c16359dacd2c66e7b79f2143a26ac7a4269"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000794e30ec87650feebfdc5c39c51927ebb8407129ed5e93375dd825e50380"));
         //assert(consensus.hashGenesisBlock == uint256S("0x00005bec991f54bc0426f0361a1392989d42c032c7854e8a6dd54be00c1fad0b"));
         assert(genesis.hashMerkleRoot == uint256S("0xf3209004efc0514df1c566add7764437d66e0ffaf87cdb6dc88b2c1453ebdc22"));
 
@@ -213,12 +213,12 @@ public:
         
         printf("TEST NET ========================================================= \n");
 
-        genesis = CreateGenesisBlock(GENESIS_TIME, 43941840, GENESIS_DIFFICULTY, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(GENESIS_TIME, 44075569, GENESIS_DIFFICULTY, 1, 50 * COIN);
 	    
         //MineGenesisBlock(genesis);
 
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00004bdad34b9ad0d2da496887b57b22e2ebf010a4cc718136b460d305eed2c5"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00001435d4504da70dd1ab10c09e0439b69807d6145c1322b15bb932e5cae03e"));
         assert(genesis.hashMerkleRoot == uint256S("0xf3209004efc0514df1c566add7764437d66e0ffaf87cdb6dc88b2c1453ebdc22"));
 
         vFixedSeeds.clear();
@@ -296,12 +296,12 @@ public:
         printf("REGTEST NET ========================================================= \n");
 
 
-	genesis = CreateGenesisBlock(GENESIS_TIME, 916623227, GENESIS_DIFFICULTY, 1, 50 * COIN);
+	genesis = CreateGenesisBlock(GENESIS_TIME, 916716142, GENESIS_DIFFICULTY, 1, 50 * COIN);
 	
-    //MineGenesisBlock(genesis);
+        //MineGenesisBlock(genesis);
  
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00004e8c65e362e60c8fd8b2a9816e1da270664296ee5ecda343b8df0ac9dc42"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00002e473d4f041791f930d9d51419e4b35d5203457c64ac922680cc9b10962c"));
         assert(genesis.hashMerkleRoot == uint256S("0xf3209004efc0514df1c566add7764437d66e0ffaf87cdb6dc88b2c1453ebdc22"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
