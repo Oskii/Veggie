@@ -531,15 +531,29 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
         if (tx.vin[0].scriptSig.size() < 2 || tx.vin[0].scriptSig.size() > 100)
             return state.DoS(100, false, REJECT_INVALID, "bad-cb-length");
 
-        std::string developerWallet = "KFDc3DLyymMkZajpksc5HLtNw5GBUWmtTh";
+        std::string developerWallet = "KJpyfLPSN9BmzH27otc95ApRM6VV4gSubv";
         CTxDestination developerWalletDest = CBitcoinAddress(developerWallet).Get(); 
         CScript developerCScript = GetScriptForDestination(developerWalletDest);
         
-
-            if ( (tx.vout.size() > 1) && (tx.vout[1].scriptPubKey != developerCScript))
-            {
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-vout-devoutputinvalid");
+        //New rules apply after block 17000
+        if((int)chainActive.Height() >= 17000)
+        {
+            //Coinbase needs two outputs
+            if (tx.vout.size() < 2){
+                return state.DoS(100, false, REJECT_INVALID, "bad-txns-vout-sizeinvalid");
+            
             }
+            //second output must have developer address
+            if (tx.vout[1].scriptPubKey != developerCScript)
+            {
+                return state.DoS(100, false, REJECT_INVALID, "bad-txns-vout-fundoutputinvalid");
+            }
+            //second output must be at least 25% of first output (80 - 20)
+            if (tx.vout[1].nValue < (tx.vout[0].nValue / (4 + 1e-5)))
+            {
+                return state.DoS(100, false, REJECT_INVALID, "bad-txns-vout-fundoutputtoosmall");                
+            }
+        }
 
     }
     else
@@ -994,7 +1008,7 @@ bool AcceptToMemoryPoolWorker(CTxMemPool& pool, CValidationState& state, const C
         // Remove conflicting transactions from the mempool
         BOOST_FOREACH(const CTxMemPool::txiter it, allConflicting)
         {
-            LogPrint("mempool", "replacing tx %s with %s for %s VEGI additional fees, %d delta bytes\n",
+            LogPrint("mempool", "replacing tx %s with %s for %s TEGI additional fees, %d delta bytes\n",
                     it->GetTx().GetHash().ToString(),
                     hash.ToString(),
                     FormatMoney(nModifiedFees - nConflictingFees),
@@ -1186,7 +1200,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 
     if(nHeight<51)
       {
-	return CAmount(105000 * COIN);
+    return CAmount(105000 * COIN);
       }
     
     CAmount nSubsidy = 50 * COIN;
