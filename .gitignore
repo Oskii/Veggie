@@ -9,6 +9,7 @@ background.tiff*
 src/bitcoin
 src/Veggied
 src/Veggie-cli
+src/bitcoin-tx
 src/Veggie-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
