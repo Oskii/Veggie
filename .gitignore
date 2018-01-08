@@ -7,12 +7,14 @@ background.tiff*
 
 *.exe
 src/bitcoin
-src/GELFd
-src/GELF-cli
+src/Veggied
+src/Veggie-cli
 src/bitcoin-tx
+src/Veggie-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
-src/qt/test/test_GELF-qt
+src/qt/test/test_bitcoin-qt
+src/qt/test/test_Veggie-qt
 
 # autoreconf
 Makefile.in
@@ -79,12 +81,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-GELF-qt
-PlusOneCoin-Qt.app
+Veggie-qt
+Veggie-Qt.app
 
 # Unit-tests
 Makefile.test
-GELF-qt_test
+Veggie-qt_test
 src/test/buildenv.py
 
 # Resources cpp
