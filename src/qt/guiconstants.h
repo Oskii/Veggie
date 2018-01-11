@@ -49,7 +49,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Veggie"
-#define QAPP_ORG_DOMAIN "Veggie.io"
+#define QAPP_ORG_DOMAIN "Veggiecoin.io"
 #define QAPP_APP_NAME_DEFAULT "Veggie-Qt"
 #define QAPP_APP_NAME_TESTNET "Veggie-Qt-testnet"
 

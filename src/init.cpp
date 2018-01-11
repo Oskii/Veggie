@@ -507,7 +507,7 @@ std::string HelpMessage(HelpMessageMode mode)
 std::string LicenseInfo()
 {
     const std::string URL_SOURCE_CODE = "<https://github.com/Oskii/Veggie>";
-    const std::string URL_WEBSITE = "<https://Veggie.io>";
+    const std::string URL_WEBSITE = "<https://Veggiecoin.io>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2017, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
