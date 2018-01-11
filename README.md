@@ -1,7 +1,7 @@
 Veggie
 ============
 
-https://Veggie.io
+https://Veggiecoin.io
 
 What is Veggie?
 ---------------------
