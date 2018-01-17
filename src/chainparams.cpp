@@ -123,16 +123,12 @@ public:
         nDefaultPort = 22736; //maybe 22717
         nPruneAfterHeight = 100000;
         
-        printf("MAIN NET ========================================================= \n");
-
-        //genesis = CreateGenesisBlock(GENESIS_TIME, 2317582475, GENESIS_DIFFICULTY, 1, 50 * COIN);
         genesis = CreateGenesisBlock(GENESIS_TIME, 2317976953, GENESIS_DIFFICULTY, 1, 50 * COIN);
     	
         //MineGenesisBlock(genesis);
     	
     	consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x0000794e30ec87650feebfdc5c39c51927ebb8407129ed5e93375dd825e50380"));
-        //assert(consensus.hashGenesisBlock == uint256S("0x00005bec991f54bc0426f0361a1392989d42c032c7854e8a6dd54be00c1fad0b"));
         assert(genesis.hashMerkleRoot == uint256S("0xf3209004efc0514df1c566add7764437d66e0ffaf87cdb6dc88b2c1453ebdc22"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
@@ -160,7 +156,12 @@ public:
         chainTxData = ChainTxData{
         };
 
-        printf("Main net genesis: genesis is verified. \n");
+    }
+
+    void UpdateDifficultyAdjustmentParameters(int64_t nPowTargetSpacing, int64_t nPowTargetTimespan)
+    {
+        consensus.nPowTargetSpacing = nPowTargetSpacing;
+        consensus.nPowTargetTimespan = nPowTargetTimespan;
     }
 };
 static CMainParams mainParams;
@@ -398,4 +399,15 @@ void MineGenesisBlock(CBlock &genesis)
   //printf("HASH IS: %s\n", UintToArith256(genesis.GetHash()).ToString().c_str());
 
   printf("Converting genesis hash to string: %s\n",genesis.ToString().c_str());	
+}
+
+void SetDifficultyAdjustmentParams(int nHeight)
+{
+    std::cout << "chainActive height is: " << nHeight << std::endl;
+    if (nHeight >= 17500) {
+        int64_t modifiedPowTargetTimespan = 60 * 60 * 12; // 12 hours
+        int64_t modifiedPowTargetSpacing = 10 * 60;   // 10 minute
+
+        mainParams.UpdateDifficultyAdjustmentParameters(modifiedPowTargetSpacing, modifiedPowTargetTimespan);
+    }
 }
