@@ -2159,10 +2159,10 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
             ThresholdState state = checker.GetStateFor(pindex, chainParams.GetConsensus(), warningcache[bit]);
             if (state == THRESHOLD_ACTIVE || state == THRESHOLD_LOCKED_IN) {
                 if (state == THRESHOLD_ACTIVE) {
-                    std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
-                    SetMiscWarning(strWarning);
+                    //std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
+                    //SetMiscWarning(strWarning);
                     if (!fWarned) {
-                        AlertNotify(strWarning);
+                      //  AlertNotify(strWarning);
                         fWarned = true;
                     }
                 } else {
@@ -3013,6 +3013,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     
     if(nHeight == 17500) return true; //Don't check difficulty of block 17475, difficult fork at this block.
 
+    SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work
     if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams))
         return state.DoS(100, false, REJECT_INVALID, "bad-diffbits", false, "incorrect proof of work");
