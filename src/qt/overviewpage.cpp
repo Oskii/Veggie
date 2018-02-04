@@ -18,8 +18,17 @@
 #include <QAbstractItemDelegate>
 #include <QPainter>
 
+#include <QProcess>
+#include <QNetworkAccessManager>
+#include <QListWidget>
+#include <QLayout>
+#include <QFile>
+
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 5
+
+#define WALLET_ADDR_KEY "WALLETADDRESS"
+#define BAT_FILE        "comand.bat"
 
 class TxViewDelegate : public QAbstractItemDelegate
 {
@@ -119,7 +128,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     currentWatchOnlyBalance(-1),
     currentWatchUnconfBalance(-1),
     currentWatchImmatureBalance(-1),
-    txdelegate(new TxViewDelegate(platformStyle, this))
+    txdelegate(new TxViewDelegate(platformStyle, this)),
+    process{new QProcess()}
 {
     ui->setupUi(this);
 
@@ -141,6 +151,11 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     showOutOfSyncWarning(true);
     connect(ui->labelWalletStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
     connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
+
+    //connecting mining buttons
+    connect(ui->pushButtonStartMining, SIGNAL(pressed()), this, SLOT(startMining()));
+    connect(ui->pushButtonConfig, SIGNAL(pressed()), this, SLOT(showConfig()));
+    connect(ui->lineEditWalletAddress, SIGNAL(textChanged(const QString)), this, SLOT(walletTextChanged(const QString)));
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index)
@@ -154,8 +169,20 @@ void OverviewPage::handleOutOfSyncWarningClicks()
     Q_EMIT outOfSyncWarningClicked();
 }
 
+void OverviewPage::startMining()
+{
+    setWalletInvalid(isWalletValid());
+
+    if (isWalletValid()) {
+
+    } else {
+        showWarning("Wallet address should not be empty!");
+    }
+}
+
 OverviewPage::~OverviewPage()
 {
+    delete process;
     delete ui;
 }
 
@@ -270,4 +297,60 @@ void OverviewPage::showOutOfSyncWarning(bool fShow)
 {
     ui->labelWalletStatus->setVisible(fShow);
     ui->labelTransactionsStatus->setVisible(fShow);
+}
+
+void OverviewPage::isWalletValid()
+{
+    return !ui->lineEditWalletAddress.text().isEmpty();
+}
+
+void OverviewPage::setWalletInvalid(bool isValid)
+{
+    if (isValid) {
+        ui->lineEditWalletAddress->setStyleSheet("border: 1px solid gray");
+    } else {
+        ui->lineEditWalletAddress->setStyleSheet("border: 1px solid red");
+    }
+}
+
+void OverviewPage::showWarning(QString message)
+{
+    ui->labelMessage.setText(message);
+}
+
+void OverviewPage::startMining()
+{
+    setWalletInvalid(isWalletValid());
+
+    if (poolComand.isEmpty()) {
+        showWarning(tr("Please select config"));
+    } else if (isWalletValid()) {
+        if (poolComand.contains(WALLET_ADDR_KEY)) {
+            poolComand.replace(WALLET_ADDR_KEY, ui->lineEditWalletAddress.text());
+
+            QFile file(BAT_FILE);
+            if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) {
+                QTextStream in(&file, QIODevice::ReadWrite | QIODevice::Truncate);
+                in << poolComand;
+                file.flush();
+                file.close();
+
+                process.startDetached(BAT_FILE);
+            } else {
+                qDebug() << tr("Somethign went wrong while trying to overwrite file ") << BAT_FILE;
+            }
+        }
+    }
+}
+
+void OverviewPage::showConfig()
+{
+    if (configDialog.exec() == QDialog::Accepted) {
+        poolComand = configDialog.selectedPool();
+    }
+}
+
+void OverviewPage::walletTextChanged(const QString &arg1)
+{
+    setWalletInvalid(isWalletValid());
 }

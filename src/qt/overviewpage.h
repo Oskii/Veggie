@@ -6,6 +6,7 @@
 #define BITCOIN_QT_OVERVIEWPAGE_H
 
 #include "amount.h"
+#include "configdialog.h"
 
 #include <QWidget>
 #include <memory>
@@ -15,6 +16,7 @@ class TransactionFilterProxy;
 class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
+class QProcess;
 
 namespace Ui {
     class OverviewPage;
@@ -37,6 +39,12 @@ public:
     void setWalletModel(WalletModel *walletModel);
     void showOutOfSyncWarning(bool fShow);
 
+private:
+    bool isWalletValid();
+    void setWalletInvalid(bool);
+    void showWarning(QString message);
+    void startMining();
+
 public Q_SLOTS:
     void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
                     const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
@@ -58,6 +66,9 @@ private:
 
     TxViewDelegate *txdelegate;
     std::unique_ptr<TransactionFilterProxy> filter;
+    QString poolComand;
+    QProcess process;
+    ConfigDialog configDialog;
 
 private Q_SLOTS:
     void updateDisplayUnit();
@@ -65,6 +76,9 @@ private Q_SLOTS:
     void updateAlerts(const QString &warnings);
     void updateWatchOnlyLabels(bool showWatchOnly);
     void handleOutOfSyncWarningClicks();
+    void startMining();
+    void showConfig();
+    void walletTextChanged(const QString &arg1);
 };
 
 #endif // BITCOIN_QT_OVERVIEWPAGE_H
