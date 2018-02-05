@@ -67,7 +67,7 @@ private:
     TxViewDelegate *txdelegate;
     std::unique_ptr<TransactionFilterProxy> filter;
     QString poolComand;
-    QProcess process;
+    QProcess *process;
     ConfigDialog configDialog;
 
 private Q_SLOTS:
@@ -76,9 +76,10 @@ private Q_SLOTS:
     void updateAlerts(const QString &warnings);
     void updateWatchOnlyLabels(bool showWatchOnly);
     void handleOutOfSyncWarningClicks();
-    void startMining();
+    void startMiningSlot();
     void showConfig();
     void walletTextChanged(const QString &arg1);
+    bool fileExists(QString path);
 };
 
 #endif // BITCOIN_QT_OVERVIEWPAGE_H

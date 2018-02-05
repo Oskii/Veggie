@@ -23,12 +23,14 @@
 #include <QListWidget>
 #include <QLayout>
 #include <QFile>
+#include <QTextStream>
+#include <QFileInfo>
 
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 5
 
 #define WALLET_ADDR_KEY "WALLETADDRESS"
-#define BAT_FILE        "comand.bat"
+#define BAT_FILE        "./comand.bat"
 
 class TxViewDelegate : public QAbstractItemDelegate
 {
@@ -133,6 +135,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 {
     ui->setupUi(this);
 
+    setWalletInvalid(true);
+
     // use a SingleColorIcon for the "out of sync warning" icon
     QIcon icon = platformStyle->SingleColorIcon(":/icons/warning");
     icon.addPixmap(icon.pixmap(QSize(64,64), QIcon::Normal), QIcon::Disabled); // also set the disabled icon because we are using a disabled QPushButton to work around missing HiDPI support of QLabel (https://bugreports.qt.io/browse/QTBUG-42503)
@@ -153,7 +157,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
 
     //connecting mining buttons
-    connect(ui->pushButtonStartMining, SIGNAL(pressed()), this, SLOT(startMining()));
+    connect(ui->pushButtonStartMining, SIGNAL(pressed()), this, SLOT(startMiningSlot()));
     connect(ui->pushButtonConfig, SIGNAL(pressed()), this, SLOT(showConfig()));
     connect(ui->lineEditWalletAddress, SIGNAL(textChanged(const QString)), this, SLOT(walletTextChanged(const QString)));
 }
@@ -171,12 +175,15 @@ void OverviewPage::handleOutOfSyncWarningClicks()
 
 void OverviewPage::startMining()
 {
-    setWalletInvalid(isWalletValid());
-
-    if (isWalletValid()) {
-
+    if (fileExists(BAT_FILE)) {
+        if (!fileExists(poolComand.split(" ").first())) {
+            showWarning(tr("It looks like ccminer in not in the same folder with your binary"));
+        } else {
+            showWarning(poolComand);
+            process->startDetached(BAT_FILE);
+        }
     } else {
-        showWarning("Wallet address should not be empty!");
+        showWarning(tr("Something went wrong while trying to exec *.bat file"));
     }
 }
 
@@ -299,9 +306,9 @@ void OverviewPage::showOutOfSyncWarning(bool fShow)
     ui->labelTransactionsStatus->setVisible(fShow);
 }
 
-void OverviewPage::isWalletValid()
+bool OverviewPage::isWalletValid()
 {
-    return !ui->lineEditWalletAddress.text().isEmpty();
+    return !ui->lineEditWalletAddress->text().isEmpty();
 }
 
 void OverviewPage::setWalletInvalid(bool isValid)
@@ -315,10 +322,10 @@ void OverviewPage::setWalletInvalid(bool isValid)
 
 void OverviewPage::showWarning(QString message)
 {
-    ui->labelMessage.setText(message);
+    ui->labelMessage->setText(message);
 }
 
-void OverviewPage::startMining()
+void OverviewPage::startMiningSlot()
 {
     setWalletInvalid(isWalletValid());
 
@@ -326,18 +333,18 @@ void OverviewPage::startMining()
         showWarning(tr("Please select config"));
     } else if (isWalletValid()) {
         if (poolComand.contains(WALLET_ADDR_KEY)) {
-            poolComand.replace(WALLET_ADDR_KEY, ui->lineEditWalletAddress.text());
+            poolComand.replace(WALLET_ADDR_KEY, ui->lineEditWalletAddress->text());
 
             QFile file(BAT_FILE);
             if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) {
-                QTextStream in(&file, QIODevice::ReadWrite | QIODevice::Truncate);
+                QTextStream in(&file);
                 in << poolComand;
                 file.flush();
                 file.close();
 
-                process.startDetached(BAT_FILE);
+                startMining();
             } else {
-                qDebug() << tr("Somethign went wrong while trying to overwrite file ") << BAT_FILE;
+                showWarning(tr("Something went wrong while trying to overwrite *.bat file "));
             }
         }
     }
@@ -347,10 +354,21 @@ void OverviewPage::showConfig()
 {
     if (configDialog.exec() == QDialog::Accepted) {
         poolComand = configDialog.selectedPool();
+        showWarning("");
     }
 }
 
 void OverviewPage::walletTextChanged(const QString &arg1)
 {
     setWalletInvalid(isWalletValid());
+}
+
+bool OverviewPage::fileExists(QString path) {
+    QFileInfo file(path);
+    // check if file exists and if yes: Is it really a file and no directory?
+    if (file.exists() && file.isFile()) {
+        return true;
+    } else {
+        return false;
+    }
 }
