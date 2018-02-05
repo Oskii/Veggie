@@ -180,7 +180,11 @@ void OverviewPage::startMining()
             showWarning(tr("It looks like ccminer in not in the same folder with your binary"));
         } else {
             showWarning(poolComand);
-            process->startDetached(BAT_FILE);
+            QFileInfo cmdFile( "C:\\Windows\\system32\\cmd.exe");
+            QStringList l;
+            l << "/c";
+            l << BAT_FILE;
+            process->start(cmdFile.absoluteFilePath(), l);
         }
     } else {
         showWarning(tr("Something went wrong while trying to exec *.bat file"));
