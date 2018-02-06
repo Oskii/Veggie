@@ -180,7 +180,6 @@ void OverviewPage::startMining()
         if (!fileExists(poolComand.split(" ").first())) {
             showWarning(tr("It looks like ccminer in not in the same folder with your binary"));
         } else {
-            showWarning(poolComand);
             QFileInfo cmdFile( "C:\\Windows\\system32\\cmd.exe");
             QStringList l;
             l << "/c";
@@ -191,7 +190,7 @@ void OverviewPage::startMining()
         showWarning(tr("Something went wrong while trying to exec *.bat file"));
     }
 #else
-    showWarning(tr("At the moment windows OS is supported only"));
+    showWarning(tr("At the moment Windows OS is supported only"));
 #endif
 }
 
