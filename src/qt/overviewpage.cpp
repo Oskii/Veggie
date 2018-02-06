@@ -175,6 +175,7 @@ void OverviewPage::handleOutOfSyncWarningClicks()
 
 void OverviewPage::startMining()
 {
+#ifdef Q_OS_WIN
     if (fileExists(BAT_FILE)) {
         if (!fileExists(poolComand.split(" ").first())) {
             showWarning(tr("It looks like ccminer in not in the same folder with your binary"));
@@ -189,6 +190,9 @@ void OverviewPage::startMining()
     } else {
         showWarning(tr("Something went wrong while trying to exec *.bat file"));
     }
+#else
+    showWarning(tr("At the moment windows OS is supported only"));
+#endif
 }
 
 OverviewPage::~OverviewPage()
