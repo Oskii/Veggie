@@ -168,6 +168,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     connect(ui->lineEditWalletAddress, SIGNAL(textChanged(const QString)), this, SLOT(walletTextChanged(const QString)));
 
     ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: gray; background-color: white;");
+
+    miningOutput = tr("There no logs yet");
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index)
