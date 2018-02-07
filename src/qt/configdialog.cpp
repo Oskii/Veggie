@@ -12,22 +12,28 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QAbstractButton>
+#include <QTimer>
 
 #define POOL_URL "https://www.veggiecoin.io/pools.list"
+#define RETRY_TIME  5000
 
 ConfigDialog::ConfigDialog(QDialog *parent) : QDialog(parent),
     ui(new Ui::ConfigDialog),
-    mgr{new QNetworkAccessManager()}
+    mgr{new QNetworkAccessManager()},
+    retryTimer{new QTimer(this)}
 {
   ui->setupUi(this);
 
   connect(mgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleResponse(QNetworkReply*)));
   connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton *)), this, SLOT(buttonPressed(QAbstractButton *)));
+  connect(retryTimer, SIGNAL(timeout()), this, SLOT(allowRetry()));
 }
 
 ConfigDialog::~ConfigDialog()
 {
+    delete retryTimer;
     delete mgr;
+    delete ui;
 }
 
 int ConfigDialog::exec()
@@ -47,9 +53,13 @@ QString ConfigDialog::selectedPool()
     return poolList.at(ui->listWidgetPool->currentRow());
 }
 
+void ConfigDialog::showMessage(QString m)
+{
+    ui->labelMessage->setText(m);
+}
+
 void ConfigDialog::updateList()
 {
-
     QString itemText;
     for (int i=0; i<poolList.count();i++) {
         itemText = poolList.at(i);
@@ -69,9 +79,12 @@ void ConfigDialog::updateList()
 
 void ConfigDialog::getPolls()
 {
+    isRetryAllowed = false;
+    retryTimer->start(RETRY_TIME);
+
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     ui->listWidgetPool->clear();
-    ui->labelMessage->setText(tr("Please wait while loading available pools"));
+    showMessage(tr("Please wait while loading available pools"));
 
     mgr->get(QNetworkRequest(QUrl(POOL_URL)));
 }
@@ -81,15 +94,20 @@ void ConfigDialog::handleResponse(QNetworkReply *reply)
     QByteArray responceData = reply->readAll();
     QString respons(responceData);
 
+    poolList.clear();
     poolList = respons.split("\n");
-    ui->labelMessage->setText("Pool list received: " + QString().number(poolList.count()));
+    showMessage(tr("Pool list received"));
 
     updateList();
 }
 
 void ConfigDialog::retryPressed(QAbstractButton *)
 {
-    getPolls();
+    if (isRetryAllowed){
+        getPolls();
+    } else {
+        showMessage(tr("Too many requests per seconds. Please wait 5 seconds."));
+    }
 }
 
 void ConfigDialog::okPressed(QAbstractButton *)
@@ -113,4 +131,10 @@ void ConfigDialog::buttonPressed(QAbstractButton *button)
     } else if (button == ui->buttonBox->button(QDialogButtonBox::Retry)) {
         retryPressed(button);
     }
+}
+
+void ConfigDialog::allowRetry()
+{
+    isRetryAllowed = true;
+    showMessage(tr(""));
 }

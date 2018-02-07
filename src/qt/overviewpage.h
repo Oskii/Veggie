@@ -10,13 +10,13 @@
 
 #include <QWidget>
 #include <memory>
+#include <QProcess>
 
 class ClientModel;
 class TransactionFilterProxy;
 class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
-class QProcess;
 
 namespace Ui {
     class OverviewPage;
@@ -80,6 +80,8 @@ private Q_SLOTS:
     void showConfig();
     void walletTextChanged(const QString &arg1);
     bool fileExists(QString path);
+    void miningStarted();
+    void miningErrorOccurred(QProcess::ProcessError);
 };
 
 #endif // BITCOIN_QT_OVERVIEWPAGE_H

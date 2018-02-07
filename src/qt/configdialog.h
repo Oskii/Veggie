@@ -7,6 +7,7 @@
 class QNetworkAccessManager;
 class QNetworkReply;
 class QAbstractButton;
+class QTimer;
 
 namespace Ui {
     class ConfigDialog;
@@ -22,6 +23,7 @@ public:
     int exec() override;
     void accept() override;
     QString selectedPool();
+    void showMessage(QString);
 
 private:
     void updateList();
@@ -32,6 +34,8 @@ private:
 
     QStringList poolList;
     QNetworkAccessManager *mgr;
+    bool isRetryAllowed;
+    QTimer *retryTimer;
 
 private Q_SLOTS:
     void handleResponse(QNetworkReply *reply);
@@ -39,5 +43,6 @@ private Q_SLOTS:
     void okPressed(QAbstractButton *button);
     void canclePressed(QAbstractButton *button);
     void buttonPressed(QAbstractButton *button);
+    void allowRetry();
 };
 #endif

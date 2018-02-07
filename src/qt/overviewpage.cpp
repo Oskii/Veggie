@@ -137,6 +137,9 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     setWalletInvalid(true);
 
+    connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
+    connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
+
     // use a SingleColorIcon for the "out of sync warning" icon
     QIcon icon = platformStyle->SingleColorIcon(":/icons/warning");
     icon.addPixmap(icon.pixmap(QSize(64,64), QIcon::Normal), QIcon::Disabled); // also set the disabled icon because we are using a disabled QPushButton to work around missing HiDPI support of QLabel (https://bugreports.qt.io/browse/QTBUG-42503)
@@ -160,6 +163,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     connect(ui->pushButtonStartMining, SIGNAL(pressed()), this, SLOT(startMiningSlot()));
     connect(ui->pushButtonConfig, SIGNAL(pressed()), this, SLOT(showConfig()));
     connect(ui->lineEditWalletAddress, SIGNAL(textChanged(const QString)), this, SLOT(walletTextChanged(const QString)));
+
+    ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: gray; background-color: white;");
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index)
@@ -321,8 +326,10 @@ bool OverviewPage::isWalletValid()
 void OverviewPage::setWalletInvalid(bool isValid)
 {
     if (isValid) {
+        showWarning("");
         ui->lineEditWalletAddress->setStyleSheet("border: 1px solid gray");
     } else {
+        showWarning(tr("Please enter your wallet"));
         ui->lineEditWalletAddress->setStyleSheet("border: 1px solid red");
     }
 }
@@ -337,6 +344,7 @@ void OverviewPage::startMiningSlot()
     setWalletInvalid(isWalletValid());
 
     if (poolComand.isEmpty()) {
+        ui->lineEditConfig->setStyleSheet("border: 1px solid red; color: gray; background-color: white;");
         showWarning(tr("Please select config"));
     } else if (isWalletValid()) {
         if (poolComand.contains(WALLET_ADDR_KEY)) {
@@ -362,6 +370,9 @@ void OverviewPage::showConfig()
     if (configDialog.exec() == QDialog::Accepted) {
         poolComand = configDialog.selectedPool();
         showWarning("");
+
+        ui->lineEditConfig->setText(poolComand);
+        ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: black; background-color: white;");
     }
 }
 
@@ -377,5 +388,34 @@ bool OverviewPage::fileExists(QString path) {
         return true;
     } else {
         return false;
+    }
+}
+
+void OverviewPage::miningStarted()
+{
+    showWarning(tr("Mining successfully started!"));
+}
+
+void OverviewPage::miningErrorOccurred(QProcess::ProcessError err)
+{
+    switch(err) {
+    case QProcess::FailedToStart:
+        showWarning(tr("Script file not found, resource error"));
+        break;
+    case QProcess::Crashed:
+        showWarning(tr("Ccminer crashed"));
+        break;
+    case QProcess::Timedout:
+        showWarning(tr("Ccminer timedout"));
+        break;
+    case QProcess::ReadError:
+        showWarning(tr("Read error"));
+        break;
+    case QProcess::WriteError:
+        showWarning(tr("Write error"));
+        break;
+    case QProcess::UnknownError:
+        showWarning(tr("Unknown error"));
+        break;
     }
 }
