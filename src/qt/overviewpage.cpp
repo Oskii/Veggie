@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QFileInfo>
+#include <QDir>
 
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 5
@@ -188,7 +189,7 @@ void OverviewPage::startMining()
             QFileInfo cmdFile( "C:\\Windows\\system32\\cmd.exe");
             QStringList l;
             l << "/c";
-            l << BAT_FILE;
+            l << QDir::currentPath() + BAT_FILE;
             process->start(cmdFile.absoluteFilePath(), l);
         }
     } else {
