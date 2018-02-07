@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <memory>
 #include <QProcess>
+#include <QDateTime>
 
 class ClientModel;
 class TransactionFilterProxy;

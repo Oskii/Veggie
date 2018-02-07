@@ -25,7 +25,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QFileInfo>
-#include <QDateTime>
 #include <QDir>
 
 #define DECORATION_SIZE 54
