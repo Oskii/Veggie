@@ -69,6 +69,8 @@ private:
     QString poolComand;
     QProcess *process;
     ConfigDialog configDialog;
+    QString miningOutput;
+    QDateTime latestMiningOutputDate;
 
 private Q_SLOTS:
     void updateDisplayUnit();
@@ -82,6 +84,7 @@ private Q_SLOTS:
     bool fileExists(QString path);
     void miningStarted();
     void miningErrorOccurred(QProcess::ProcessError);
+    void readyReadStandardOutput();
 };
 
 #endif // BITCOIN_QT_OVERVIEWPAGE_H

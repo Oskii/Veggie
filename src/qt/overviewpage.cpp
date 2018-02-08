@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QFileInfo>
+#include <QDateTime>
 
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 5
@@ -418,4 +419,10 @@ void OverviewPage::miningErrorOccurred(QProcess::ProcessError err)
         showWarning(tr("Unknown error"));
         break;
     }
+}
+
+void OverviewPage::readyReadStandardOutput()
+{
+    miningOutput = process->readAll();
+    latestMiningOutputDate = QDateTime::currentDateTime();
 }
