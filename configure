@@ -23428,7 +23428,7 @@ fi
       QT_LIB_PREFIX=Qt
       bitcoin_qt_got_major_vers=4
     fi
-    qt5_modules="Qt5Core Qt5Gui Qt5Network Qt5Widgets"
+    qt5_modules="Qt5Core Qt5Gui Qt5Network Qt5Widgets Qt5WebKitWidgets"
     qt4_modules="QtCore QtGui QtNetwork"
 
   if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then

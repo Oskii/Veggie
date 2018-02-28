@@ -86,7 +86,6 @@ private Q_SLOTS:
     void miningStarted();
     void miningErrorOccurred(QProcess::ProcessError);
     void readyReadStandardOutput();
-    void showLog();
 };
 
 #endif // BITCOIN_QT_OVERVIEWPAGE_H

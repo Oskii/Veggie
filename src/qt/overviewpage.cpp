@@ -28,6 +28,9 @@
 #include <QDir>
 #include <QMessageBox>
 
+#include <QWebView>
+#include <QUrl>
+
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 5
 
@@ -139,6 +142,9 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     setWalletInvalid(true);
 
+    QWebView *m_pWebView = new QWebView(ui->webWidget);
+    m_pWebView->load(QUrl("http://veggie.altcoin-pool.eu/site/mining"));
+
     connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
     connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
 
@@ -164,7 +170,6 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     //connecting mining buttons
     connect(ui->pushButtonStartMining, SIGNAL(pressed()), this, SLOT(startMiningSlot()));
     connect(ui->pushButtonConfig, SIGNAL(pressed()), this, SLOT(showConfig()));
-    connect(ui->pushButtonShowLog, SIGNAL(pressed()), this, SLOT(showLog()));
     connect(ui->lineEditWalletAddress, SIGNAL(textChanged(const QString)), this, SLOT(walletTextChanged(const QString)));
 
     ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: gray; background-color: white;");
@@ -429,12 +434,6 @@ void OverviewPage::readyReadStandardOutput()
 {
     miningOutput = process->readAll();
     latestMiningOutputDate = QDateTime::currentDateTime();
-}
 
-void OverviewPage::showLog()
-{
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Log From: " + latestMiningOutputDate.toString(Qt::TextDate));
-    msgBox.setText(miningOutput);
-    msgBox.exec();
+    ui->logView->append(miningOutput);
 }
