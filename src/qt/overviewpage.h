@@ -18,7 +18,7 @@ class TransactionFilterProxy;
 class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
-class QWebView;
+class QWebEngineView;
 
 namespace Ui {
     class OverviewPage;
@@ -75,7 +75,7 @@ private:
     QString miningOutput;
     QDateTime latestMiningOutputDate;
 
-    QWebView *webView;
+    QWebEngineView *webView;
 
     QString poolUrlString;
 

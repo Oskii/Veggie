@@ -28,7 +28,7 @@
 #include <QDir>
 #include <QMessageBox>
 
-#include <QWebView>
+#include <QWebEngineView>
 #include <QUrl>
 
 #define DECORATION_SIZE 54
@@ -160,7 +160,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     setWalletInvalid(true);
 
-    webView = new QWebView(ui->webWidget);
+    webView = new QWebEngineView(ui->webWidget);
 
     connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
     connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
@@ -460,6 +460,7 @@ void OverviewPage::showConfig()
             QString urlString;
             urlString.append("http://").append(lTmp.remove(0, 2));
             webView->load(QUrl(urlString));
+            webView->show();
         }
 
         ui->lineEditConfig->setText(poolComand);
