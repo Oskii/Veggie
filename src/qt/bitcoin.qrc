@@ -55,6 +55,22 @@
         <file alias="hd_disabled">res/icons/hd_disabled.png</file>
         <file alias="network_disabled">res/icons/network_disabled.png</file>
     </qresource>
+    <qresource prefix="/emoji">
+    	<file alias="potato">res/emoji/potato.png</file>
+    	<file alias="carrot">res/emoji/carrot.png</file>
+    	<file alias="cat-face">res/emoji/cat-face.png</file>
+    	<file alias="ear-of-maize">res/emoji/ear-of-maize.png</file>
+    	<file alias="avocado">res/emoji/avocado.png</file>
+    	<file alias="broccoli">res/emoji/broccoli.png</file>
+    	<file alias="eggplant">res/emoji/eggplant.png</file>
+    	<file alias="cucumber">res/emoji/cucumber.png</file>
+    	<file alias="mushroom">res/emoji/mushroom.png</file>
+    	<file alias="pig-face">res/emoji/pig-face.png</file>
+    	<file alias="fox-face">res/emoji/fox-face.png</file>
+    	<file alias="lion-face">res/emoji/lion-face.png</file>
+    	<file alias="cat-face">res/emoji/cat-face.png</file>
+    	<file alias="dog-face">res/emoji/dog-face.png</file>
+    </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>
         <file alias="spinner-001">res/movies/spinner-001.png</file>

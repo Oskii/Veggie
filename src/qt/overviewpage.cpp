@@ -37,6 +37,9 @@
 #define WALLET_ADDR_KEY "WALLETADDRESS"
 #define BAT_FILE        "./comand.bat"
 
+#define MINING_START    "Start Mining"
+#define MINING_STOP     "Stop Mining"
+
 class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
@@ -142,8 +145,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     setWalletInvalid(true);
 
-    QWebView *m_pWebView = new QWebView(ui->webWidget);
-    m_pWebView->load(QUrl("http://veggie.altcoin-pool.eu/site/mining"));
+    webView = new QWebView(ui->webWidget);
 
     connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
     connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
@@ -211,6 +213,7 @@ void OverviewPage::startMining()
 
 OverviewPage::~OverviewPage()
 {
+    delete webView;
     delete process;
     delete ui;
 }
@@ -381,6 +384,20 @@ void OverviewPage::showConfig()
         poolComand = configDialog.selectedPool();
         showWarning("");
 
+        QStringList list = poolComand.split(" ");
+        QStringList urlList = list.at(4).split(":");
+
+        if (urlList.count() == 3) {
+            QString lTmp = urlList.at(1);
+            QString urlString;
+            urlString.append("http://").append(lTmp.remove(0, 2));
+            webView->load(QUrl(urlString));
+
+            QMessageBox msgBox;
+            msgBox.setText(urlString);
+            msgBox.exec();
+        }
+
         ui->lineEditConfig->setText(poolComand);
         ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: black; background-color: white;");
     }
@@ -404,6 +421,7 @@ bool OverviewPage::fileExists(QString path) {
 void OverviewPage::miningStarted()
 {
     showWarning(tr("Mining successfully started!"));
+    ui->pushButtonStartMining->setText("Stop Mining");
 }
 
 void OverviewPage::miningErrorOccurred(QProcess::ProcessError err)
@@ -428,6 +446,8 @@ void OverviewPage::miningErrorOccurred(QProcess::ProcessError err)
         showWarning(tr("Unknown error"));
         break;
     }
+
+    ui->pushButtonStartMining->setText("Start Mining");
 }
 
 void OverviewPage::readyReadStandardOutput()

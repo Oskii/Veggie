@@ -18,6 +18,7 @@ class TransactionFilterProxy;
 class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
+class QWebView;
 
 namespace Ui {
     class OverviewPage;
@@ -72,6 +73,10 @@ private:
     ConfigDialog configDialog;
     QString miningOutput;
     QDateTime latestMiningOutputDate;
+
+    QWebView *webView;
+
+    QString poolUrlString;
 
 private Q_SLOTS:
     void updateDisplayUnit();
