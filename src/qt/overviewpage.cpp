@@ -40,6 +40,21 @@
 #define MINING_START    "Start Mining"
 #define MINING_STOP     "Stop Mining"
 
+#define potato(v)   (v > 0) && (v<99.99999999)
+#define carrot(v)   (v > 100) && (v<249.99999999)
+#define earcorn(v)  (v > 250) && (v<499.99999999)
+#define avocado(v)  (v > 500) && (v<999.99999999)
+#define brocoly(v)  (v > 1000) && (v<1999.99999999)
+#define eggplant(v) (v > 2000) && (v<4999.99999999)
+#define cucumber(v) (v > 5000) && (v<9999.99999999)
+#define mushroom(v) (v > 10000) && (v<14999.99999999)
+#define pig_face(v) (v > 15000) && (v<19999.99999999)
+#define fox_faxe(v) (v > 20000) && (v<29999.99999999)
+#define lion_face(v) (v > 30000) && (v<49999.99999999)
+#define cat_face(v) (v > 50000) && (v<74999.99999999)
+#define god_face(v) (v > 7500)
+
+
 class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
@@ -164,6 +179,12 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     connect(ui->listTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
 
+    //raised for animals
+    ui->listRaisedForAnimals->setItemDelegate(txdelegate);
+    ui->listRaisedForAnimals->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
+    ui->listRaisedForAnimals->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
+    ui->listRaisedForAnimals->setAttribute(Qt::WA_MacShowFocusRect, false);
+
     // start with displaying the "out of sync" warnings
     showOutOfSyncWarning(true);
     connect(ui->labelWalletStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
@@ -211,6 +232,40 @@ void OverviewPage::startMining()
 #endif
 }
 
+void OverviewPage::updateRank()
+{
+    double veggie = ui->labelTotal->text().split(" ").at(0).toDouble();
+    QLabel *rank = ui->labelRankLogo;
+
+    if (potato(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/potato"));
+    } else if (carrot(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/carrot"));
+    } else if (earcorn(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/cat-face"));
+    } else if (avocado(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/avocado"));
+    } else if (brocoly(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/broccoli"));
+    } else if (eggplant(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/eggplant"));
+    } else if (cucumber(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/cucumber"));
+    } else if (mushroom(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/mushroom"));
+    } else if (pig_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/pig-face"));
+    } else if (fox_faxe(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/fox-face"));
+    } else if (lion_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/lion-face"));
+    } else if (cat_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/cat-face"));
+    } else if (god_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/dog-face"));
+    }
+}
+
 OverviewPage::~OverviewPage()
 {
     delete webView;
@@ -245,6 +300,8 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     ui->labelImmature->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelImmatureText->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelWatchImmature->setVisible(showWatchOnlyImmature); // show watch-only immature balance
+
+    updateRank();
 }
 
 // show/hide watch-only labels
@@ -288,6 +345,9 @@ void OverviewPage::setWalletModel(WalletModel *model)
 
         ui->listTransactions->setModel(filter.get());
         ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
+
+        ui->listRaisedForAnimals->setModel(filter.get());
+        ui->listRaisedForAnimals->setModelColumn(TransactionTableModel::ToAddress);
 
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(),
@@ -354,25 +414,33 @@ void OverviewPage::showWarning(QString message)
 
 void OverviewPage::startMiningSlot()
 {
-    setWalletInvalid(isWalletValid());
+    if (ui->pushButtonStartMining->text() == MINING_STOP) {
+        if (process != nullptr) {
+            process->close();
+            showWarning(tr("Mining successfully stoped!"));
+            ui->pushButtonStartMining->setText(MINING_START);
+        }
+    } else {
+        setWalletInvalid(isWalletValid());
 
-    if (poolComand.isEmpty()) {
-        ui->lineEditConfig->setStyleSheet("border: 1px solid red; color: gray; background-color: white;");
-        showWarning(tr("Please select config"));
-    } else if (isWalletValid()) {
-        if (poolComand.contains(WALLET_ADDR_KEY)) {
-            poolComand.replace(WALLET_ADDR_KEY, ui->lineEditWalletAddress->text());
+        if (poolComand.isEmpty()) {
+            ui->lineEditConfig->setStyleSheet("border: 1px solid red; color: gray; background-color: white;");
+            showWarning(tr("Please select config"));
+        } else if (isWalletValid()) {
+            if (poolComand.contains(WALLET_ADDR_KEY)) {
+                poolComand.replace(WALLET_ADDR_KEY, ui->lineEditWalletAddress->text());
 
-            QFile file(BAT_FILE);
-            if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) {
-                QTextStream in(&file);
-                in << poolComand;
-                file.flush();
-                file.close();
+                QFile file(BAT_FILE);
+                if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) {
+                    QTextStream in(&file);
+                    in << poolComand;
+                    file.flush();
+                    file.close();
 
-                startMining();
-            } else {
-                showWarning(tr("Something went wrong while trying to overwrite *.bat file "));
+                    startMining();
+                } else {
+                    showWarning(tr("Something went wrong while trying to overwrite *.bat file "));
+                }
             }
         }
     }
@@ -417,7 +485,7 @@ bool OverviewPage::fileExists(QString path) {
 void OverviewPage::miningStarted()
 {
     showWarning(tr("Mining successfully started!"));
-    ui->pushButtonStartMining->setText("Stop Mining");
+    ui->pushButtonStartMining->setText(MINING_STOP);
 }
 
 void OverviewPage::miningErrorOccurred(QProcess::ProcessError err)

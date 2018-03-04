@@ -46,6 +46,7 @@ private:
     void setWalletInvalid(bool);
     void showWarning(QString message);
     void startMining();
+    void updateRank();
 
 public Q_SLOTS:
     void setBalance(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,

@@ -58,7 +58,6 @@
     <qresource prefix="/emoji">
     	<file alias="potato">res/emoji/potato.png</file>
     	<file alias="carrot">res/emoji/carrot.png</file>
-    	<file alias="cat-face">res/emoji/cat-face.png</file>
     	<file alias="ear-of-maize">res/emoji/ear-of-maize.png</file>
     	<file alias="avocado">res/emoji/avocado.png</file>
     	<file alias="broccoli">res/emoji/broccoli.png</file>
