@@ -392,10 +392,6 @@ void OverviewPage::showConfig()
             QString urlString;
             urlString.append("http://").append(lTmp.remove(0, 2));
             webView->load(QUrl(urlString));
-
-            QMessageBox msgBox;
-            msgBox.setText(urlString);
-            msgBox.exec();
         }
 
         ui->lineEditConfig->setText(poolComand);
