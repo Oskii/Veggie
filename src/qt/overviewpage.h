@@ -19,6 +19,7 @@ class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
 class QWebEngineView;
+class TransactionTableModel;
 
 namespace Ui {
     class OverviewPage;
@@ -42,6 +43,7 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
+    void fillTransactionInformation(TransactionTableModel * const transactionTableModel, bool isAnimalFunds = false);
     bool isWalletValid();
     void setWalletInvalid(bool);
     void showWarning(QString message);
@@ -79,6 +81,7 @@ private:
 
     QString poolUrlString;
 
+    static constexpr double raisedForAnimalsMultiplier = 0.25;
 private Q_SLOTS:
     void updateDisplayUnit();
     void handleTransactionClicked(const QModelIndex &index);

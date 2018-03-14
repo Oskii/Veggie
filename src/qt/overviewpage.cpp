@@ -172,18 +172,64 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     ui->labelWalletStatus->setIcon(icon);
 
     // Recent transactions
-    ui->listTransactions->setItemDelegate(txdelegate);
-    ui->listTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
-    ui->listTransactions->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
-    ui->listTransactions->setAttribute(Qt::WA_MacShowFocusRect, false);
+//    ui->tableTransactions->setColumnCount(2);
+//    QStringList tableTransactionsTitle;
+//    tableTransactionsTitle << "Recent transactions";
+//    ui->tableRaisedForAnimals->setHorizontalHeaderLabels(tableTransactionsTitle);
 
-    connect(ui->listTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
+//    ui->listTransactions->setItemDelegate(txdelegate);
+//    ui->listTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
+//    ui->listTransactions->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
+//    ui->listTransactions->setAttribute(Qt::WA_MacShowFocusRect, false);
+
+
+//    ui->tableTransactions->setItemDelegate(txdelegate);
+//    ui->tableTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
+//    ui->tableTransactions->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
+//    ui->tableTransactions->setAttribute(Qt::WA_MacShowFocusRect, false);
+
+
+    ui->tableTransactions->setStyleSheet("color: black;"
+                                         "background-color: transparent;"
+                                         "selection-color: white;"
+                                         "selection-background-color: grey;"
+                                         "border-width:0px transparent;");
+
+
+    ui->tableTransactions->verticalHeader()->hide();
+    ui->tableTransactions->setShowGrid(false);
+    ui->tableTransactions->horizontalHeader()->setVisible(false);
+
+
+    ui->tableRaisedForAnimals->setStyleSheet("color: black;"
+                                             "background-color: transparent;"
+                                             "selection-color: white;"
+                                             "selection-background-color: grey;"
+                                             "border: none");
+
+    ui->tableRaisedForAnimals->verticalHeader()->hide();
+    ui->tableRaisedForAnimals->setShowGrid(false);
+    ui->tableRaisedForAnimals->horizontalHeader()->setVisible(false);
+
+
+    connect(ui->tableTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
 
     //raised for animals
-    ui->listRaisedForAnimals->setItemDelegate(txdelegate);
-    ui->listRaisedForAnimals->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
-    ui->listRaisedForAnimals->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
-    ui->listRaisedForAnimals->setAttribute(Qt::WA_MacShowFocusRect, false);
+//    ui->tableRaisedForAnimals->setColumnCount(2);
+//    QStringList titleTableRaisedForAnimals;
+//    titleTableRaisedForAnimals << "Veggie Raised for Animals";
+//    ui->tableRaisedForAnimals->setHorizontalHeaderLabels(titleTableRaisedForAnimals);
+
+//    ui->listRaisedForAnimals->setItemDelegate(txdelegate);
+//    ui->listRaisedForAnimals->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
+//    ui->listRaisedForAnimals->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
+//    ui->listRaisedForAnimals->setAttribute(Qt::WA_MacShowFocusRect, false);
+
+//    ui->tableRaisedForAnimals->setItemDelegate(txdelegate);
+//    ui->tableRaisedForAnimals->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
+//    ui->tableRaisedForAnimals->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
+//    ui->tableRaisedForAnimals->setAttribute(Qt::WA_MacShowFocusRect, false);
+
 
     // start with displaying the "out of sync" warnings
     showOutOfSyncWarning(true);
@@ -328,31 +374,26 @@ void OverviewPage::setClientModel(ClientModel *model)
         updateAlerts(model->getStatusBarWarnings());
     }
 }
-
+#include <QStandardItemModel>
+#include <QStandardItem>
 void OverviewPage::setWalletModel(WalletModel *model)
 {
     this->walletModel = model;
     if(model && model->getOptionsModel())
     {
-        // Set up transaction list
-        filter.reset(new TransactionFilterProxy());
-        filter->setSourceModel(model->getTransactionTableModel());
-        filter->setLimit(NUM_ITEMS);
-        filter->setDynamicSortFilter(true);
-        filter->setSortRole(Qt::EditRole);
-        filter->setShowInactive(false);
-        filter->sort(TransactionTableModel::Date, Qt::DescendingOrder);
+        TransactionTableModel *transactionTableModel = model->getTransactionTableModel();
 
-        ui->listTransactions->setModel(filter.get());
-        ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
-
-        ui->listRaisedForAnimals->setModel(filter.get());
-        ui->listRaisedForAnimals->setModelColumn(TransactionTableModel::ToAddress);
+        //recent transactions
+        fillTransactionInformation(transactionTableModel);
+        //veggie raised for animal
+        fillTransactionInformation(transactionTableModel, true);
 
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(),
                    model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance());
-        connect(model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)), this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
+
+        connect(model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)),
+                this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
 
         connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
 
@@ -362,6 +403,94 @@ void OverviewPage::setWalletModel(WalletModel *model)
 
     // update the display unit, to not use the default ("VEGI")
     updateDisplayUnit();
+}
+#include <QString>
+void OverviewPage::fillTransactionInformation(TransactionTableModel * const transactionTableModel, bool isAnimalFunds)
+{
+    QTableView *currentTableView = nullptr;
+    float amountMultiplier = 1.0f;
+
+    if (isAnimalFunds) {
+        amountMultiplier *= raisedForAnimalsMultiplier;
+        currentTableView = ui->tableRaisedForAnimals;
+    } else {
+        currentTableView = ui->tableTransactions;
+
+    }
+
+    int currentRow = 0;
+
+    QStandardItemModel* modelStandard = new QStandardItemModel(0);
+    modelStandard->setHorizontalHeaderItem(0, new QStandardItem(""));
+    modelStandard->setHorizontalHeaderItem(1, new QStandardItem("Date"));
+    modelStandard->setHorizontalHeaderItem(2, new QStandardItem("Amount"));
+
+
+    QModelIndex topLeft = transactionTableModel->index(0,0);
+
+    for (int i(0); i < transactionTableModel->rowCount(topLeft); ++i) {
+        QModelIndex modelIndex = transactionTableModel->index(i,0);
+
+        QIcon iconByIndex = qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::WatchonlyDecorationRole));//LongDescriptionRole
+
+        //QDateTime dateTimeByIndex = modelIndex.data(TransactionTableModel::DateRole).toDateTime();
+        QString dateTimeByIndex = modelIndex.data(TransactionTableModel::DateRole).toString();
+        float amountByIndex = modelIndex.data(TransactionTableModel::AmountRole).toFloat() / 100000000.0f;
+
+        QStandardItem * date = new QStandardItem(dateTimeByIndex);
+
+        float value = amountByIndex * amountMultiplier;
+        QString stringMulptilpliedValue;
+        stringMulptilpliedValue.setNum(value, 'f');
+        stringMulptilpliedValue += " VEGI";
+
+        QStandardItem *amount = new QStandardItem(stringMulptilpliedValue);
+        QStandardItem *icon = new QStandardItem();
+        icon->setData(QVariant(modelIndex.data(TransactionTableModel::RawDecorationRole)), Qt::DecorationRole);
+
+
+
+//        modelStandard->setData(modindex, modelIndex.data(TransactionTableModel::RawDecorationRole).value<QIcon>(), Qt::DecorationRole);
+//        modelStandard->setData(modindex1, qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::RawDecorationRole)), Qt::DecorationRole);
+
+        modelStandard->setHeaderData(0, Qt::Horizontal, QVariant::fromValue(qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::RawDecorationRole))), Qt::DecorationRole);
+
+        modelStandard->setItem(currentRow, 0, icon);
+//        modelStandard->setData(modelIndex, qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::RawDecorationRole)), Qt::DecorationRole);
+        modelStandard->setItem(currentRow, 1, date);
+        modelStandard->setItem(currentRow, 2, amount);
+
+        ++currentRow;
+    }
+
+
+//    QStandardItem *test1 = new QStandardItem(QString("SADA"));
+//    QStandardItem *test2 = new QStandardItem(QString("gfdsgs"));
+
+
+//    modelStandard->setItem(currentRow, 1, test1);
+//    modelStandard->setItem(currentRow, 2, test2);
+    // Set up transaction list
+    filter.reset(new TransactionFilterProxy());
+    //filter->setSourceModel(model->getTransactionTableModel());
+    filter->setSourceModel(modelStandard);
+    filter->setLimit(NUM_ITEMS);
+    filter->setDynamicSortFilter(true);
+    filter->setSortRole(Qt::EditRole);
+    filter->setShowInactive(false);
+    filter->sort(TransactionTableModel::DateRole, Qt::DescendingOrder);
+
+
+//        ui->listTransactions->setModel(filter.get());
+//        ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
+
+//    static_cast<QStandardItemModel*>filter.get();
+//    currentTableView->setModel(filter.get());
+    currentTableView->setModel(modelStandard);
+    currentTableView->resizeRowsToContents();
+    currentTableView->resizeColumnsToContents();
+//    currentTableView->setModel( reinterpret_cast<QStandardItemModel*>(filter.get()));
+
 }
 
 void OverviewPage::updateDisplayUnit()
@@ -375,7 +504,8 @@ void OverviewPage::updateDisplayUnit()
         // Update txdelegate->unit with the current unit
         txdelegate->unit = walletModel->getOptionsModel()->getDisplayUnit();
 
-        ui->listTransactions->update();
+        ui->tableTransactions->update();
+        //ui->listTransactions->update();
     }
 }
 

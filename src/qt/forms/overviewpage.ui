@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1150</width>
+    <width>1196</width>
     <height>706</height>
    </rect>
   </property>
@@ -863,23 +863,7 @@
                </layout>
               </item>
               <item>
-               <widget class="QListView" name="listTransactions">
-                <property name="styleSheet">
-                 <string notr="true">QListView { background: transparent; }</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="verticalScrollBarPolicy">
-                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                </property>
-                <property name="horizontalScrollBarPolicy">
-                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                </property>
-                <property name="selectionMode">
-                 <enum>QAbstractItemView::NoSelection</enum>
-                </property>
-               </widget>
+               <widget class="QTableView" name="tableTransactions"/>
               </item>
              </layout>
             </item>
@@ -908,11 +892,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QListView" name="listRaisedForAnimals">
-                <property name="styleSheet">
-                 <string notr="true">QListView { background: transparent; }</string>
-                </property>
-               </widget>
+               <widget class="QTableView" name="tableRaisedForAnimals"/>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
