@@ -30,7 +30,7 @@
 #include <QStandardItemModel>
 #include <QStandardItem>
 
-#include <QWebEngineView>
+//#include <QWebEngineView>
 #include <QUrl>
 
 #define DECORATION_SIZE 54
@@ -162,7 +162,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
     setWalletInvalid(true);
 
-    webView = new QWebEngineView(ui->webWidget);
+//    webView = new QWebEngineView(ui->webWidget);
 
     connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
     connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
@@ -295,7 +295,7 @@ void OverviewPage::updateRank()
 
 OverviewPage::~OverviewPage()
 {
-    delete webView;
+//    delete webView;
     delete process;
     delete ui;
 }
@@ -390,16 +390,13 @@ void OverviewPage::setWalletModel(WalletModel *model)
 void OverviewPage::fillTransactionInformation(TransactionTableModel * const transactionTableModel, bool isAnimalFunds)
 {
     QTableView *currentTableView = nullptr;
-    QLabel *totalRaisedForAnimals = nullptr;
     float amountMultiplier = 1.0f;
 
     if (isAnimalFunds) {
         amountMultiplier *= raisedForAnimalsMultiplier;
         currentTableView = ui->tableRaisedForAnimals;
-        totalRaisedForAnimals = ui->totalRaisedForAnimalsValue;
     } else {
         currentTableView = ui->tableTransactions;
-
     }
 
     int currentRow = 0;
@@ -415,26 +412,31 @@ void OverviewPage::fillTransactionInformation(TransactionTableModel * const tran
     for (int i(0); i < transactionTableModel->rowCount(topLeft); ++i) {
         QModelIndex modelIndex = transactionTableModel->index(i, 4);//4 - for icon
 
-        QIcon iconByIndex = qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::WatchonlyDecorationRole));//LongDescriptionRole
-
+        //get data from model
+        QIcon iconByIndex = qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::WatchonlyDecorationRole));
         //QDateTime dateTimeByIndex = modelIndex.data(TransactionTableModel::DateRole).toDateTime();
         QString dateTimeByIndex = modelIndex.data(TransactionTableModel::DateRole).toString();
         float amountByIndex = modelIndex.data(TransactionTableModel::AmountRole).toFloat() / 100000000.0f;
 
-        QStandardItem * date = new QStandardItem(dateTimeByIndex);
-
         float currentValue = amountByIndex * amountMultiplier;
-        totalValue += currentValue;
-
         QString stringMulptilpliedValue;
         stringMulptilpliedValue.setNum(currentValue, 'f');
+
+        if (currentValue >= 0.0f) {
+            stringMulptilpliedValue = "+" + stringMulptilpliedValue;
+            totalValue += currentValue;
+        } else {
+            //amount for animal can't be negative
+            if (isAnimalFunds) {
+                continue;
+            }
+            stringMulptilpliedValue = "-" + stringMulptilpliedValue;
+        }
         stringMulptilpliedValue += " VEGI";
 
         QStandardItem *amount = new QStandardItem(stringMulptilpliedValue);
+        QStandardItem *date = new QStandardItem(dateTimeByIndex);
         QStandardItem *icon = new QStandardItem();
-
-//        modelIndex = transactionTableModel->index(i, 4);
-
         icon->setData(QVariant(modelIndex.data(TransactionTableModel::RawDecorationRole)), Qt::DecorationRole);
 
         modelStandard->setItem(currentRow, 0, icon);
@@ -457,11 +459,12 @@ void OverviewPage::fillTransactionInformation(TransactionTableModel * const tran
     currentTableView->resizeRowsToContents();
     currentTableView->resizeColumnsToContents();
 
-    if (totalRaisedForAnimals != nullptr) {
+    //set raised for animals total, if neeeded
+    if (isAnimalFunds) {
         QString totalMultipliedValue;
         totalMultipliedValue.setNum(totalValue, 'f');
         totalMultipliedValue += " VEGI";
-        totalRaisedForAnimals->setText(totalMultipliedValue);
+        ui->totalRaisedForAnimalsValue->setText(totalMultipliedValue);
     }
 }
 
@@ -561,8 +564,8 @@ void OverviewPage::showConfig()
             QString lTmp = urlList.at(1);
             QString urlString;
             urlString.append("http://").append(lTmp.remove(0, 2));
-            webView->load(QUrl(urlString));
-            webView->show();
+//            webView->load(QUrl(urlString));
+//            webView->show();
         }
 
         ui->lineEditConfig->setText(poolComand);
