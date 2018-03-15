@@ -863,9 +863,28 @@
                </layout>
               </item>
               <item>
-               <widget class="QTableView" name="tableTransactions"/>
+               <widget class="QTableView" name="tableTransactions">
+                <property name="font">
+                 <font>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+               </widget>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="Line" name="line_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -892,7 +911,19 @@
                </widget>
               </item>
               <item>
-               <widget class="QTableView" name="tableRaisedForAnimals"/>
+               <widget class="QTableView" name="tableRaisedForAnimals">
+                <property name="font">
+                 <font>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+               </widget>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -900,9 +931,16 @@
                  <number>10</number>
                 </property>
                 <item>
-                 <widget class="QLabel" name="label_10">
+                 <widget class="QLabel" name="totalRaisedForAnimalsText">
+                  <property name="font">
+                   <font>
+                    <pointsize>9</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>Total</string>
                   </property>
                  </widget>
                 </item>
@@ -920,7 +958,14 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLabel" name="lableTotal">
+                 <widget class="QLabel" name="totalRaisedForAnimalsValue">
+                  <property name="font">
+                   <font>
+                    <pointsize>9</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
                   <property name="text">
                    <string>none</string>
                   </property>
@@ -929,6 +974,13 @@
                </layout>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="Line" name="line_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1009,7 +1061,15 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextBrowser" name="logView"/>
+        <widget class="QTextBrowser" name="logView">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
