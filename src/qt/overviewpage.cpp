@@ -261,7 +261,10 @@ void OverviewPage::startMining()
 
 void OverviewPage::updateRank()
 {
-    double veggie = ui->labelTotal->text().split(" ").at(0).toDouble();
+//    double veggie = ui->labelTotal->text().split(" ").at(0).toDouble();
+
+    double veggie = ui->totalRaisedForAnimalsValue->text().split(" ").at(0).toDouble();
+
     QLabel *rank = ui->labelRankLogo;
 
     if (potato(veggie)) {
