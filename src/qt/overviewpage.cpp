@@ -184,7 +184,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
                                          "background-color: transparent;"
                                          "selection-color: white;"
                                          "selection-background-color: grey;"
-                                         "border-width:0px transparent;");
+                                         "border-width:none;");
 
 
     ui->tableTransactions->verticalHeader()->hide();
@@ -433,7 +433,6 @@ void OverviewPage::fillTransactionInformation(TransactionTableModel * const tran
             if (isAnimalFunds) {
                 continue;
             }
-            stringMulptilpliedValue = "-" + stringMulptilpliedValue;
         }
         stringMulptilpliedValue += " VEGI";
 
@@ -442,6 +441,9 @@ void OverviewPage::fillTransactionInformation(TransactionTableModel * const tran
         QStandardItem *icon = new QStandardItem();
         icon->setData(QVariant(modelIndex.data(TransactionTableModel::RawDecorationRole)), Qt::DecorationRole);
 
+        if (currentValue < 0.0f) {
+            amount->setForeground(QBrush(Qt::red));
+        }
         modelStandard->setItem(currentRow, 0, icon);
         modelStandard->setItem(currentRow, 1, date);
         modelStandard->setItem(currentRow, 2, amount);
