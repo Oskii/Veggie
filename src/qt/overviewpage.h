@@ -18,7 +18,8 @@ class TransactionFilterProxy;
 class TxViewDelegate;
 class PlatformStyle;
 class WalletModel;
-class QWebEngineView;
+//class QWebEngineView;
+class TransactionTableModel;
 
 namespace Ui {
     class OverviewPage;
@@ -42,6 +43,7 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
+    void fillTransactionInformation(TransactionTableModel * const transactionTableModel, bool isAnimalFunds = false);
     bool isWalletValid();
     void setWalletInvalid(bool);
     void showWarning(QString message);
@@ -72,13 +74,13 @@ private:
     QString poolComand;
     QProcess *process;
     ConfigDialog configDialog;
-    QString miningOutput;
     QDateTime latestMiningOutputDate;
 
-    QWebEngineView *webView;
+//    QWebEngineView *webView;
 
     QString poolUrlString;
 
+    static constexpr double raisedForAnimalsMultiplier = 0.25;
 private Q_SLOTS:
     void updateDisplayUnit();
     void handleTransactionClicked(const QModelIndex &index);
@@ -91,7 +93,7 @@ private Q_SLOTS:
     bool fileExists(QString path);
     void miningStarted();
     void miningErrorOccurred(QProcess::ProcessError);
-    void readyReadStandardOutput();
+    void mainingResultOutput();
 };
 
 #endif // BITCOIN_QT_OVERVIEWPAGE_H
