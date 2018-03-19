@@ -29,7 +29,9 @@
 #include <QMessageBox>
 #include <QStandardItemModel>
 #include <QStandardItem>
+
 #include <QTextStream>
+
 //#include <QWebEngineView>
 #include <QUrl>
 
@@ -321,7 +323,8 @@ OverviewPage::~OverviewPage()
     }
     QStringList listOfCommands;
     listOfCommands << "/C" << "taskkill" << "/IM" << "ccminer-x64.exe" << "/F";
-    QProcess::execute(QString("C:/windows/system32/cmd.exe"),listOfCommands);
+    QProcess::execute(QString("C:/windows/system32/cmd.exe"), listOfCommands);
+
     delete process;
     delete ui;
 }
