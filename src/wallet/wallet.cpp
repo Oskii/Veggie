@@ -3613,12 +3613,12 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
                 walletFile));
         }
         else if (nLoadWalletRet == DB_TOO_NEW) {
-            InitError(strprintf(_("Error loading %s: Wallet requires newer version of %s"), walletFile, _(VEGGIE_PACKAGE_NAME)));
+            InitError(strprintf(_("Error loading %s: Wallet requires newer version of %s"), walletFile, _(PACKAGE_NAME)));
             return NULL;
         }
         else if (nLoadWalletRet == DB_NEED_REWRITE)
         {
-            InitError(strprintf(_("Wallet needed to be rewritten: restart %s to complete"), _(VEGGIE_PACKAGE_NAME)));
+            InitError(strprintf(_("Wallet needed to be rewritten: restart %s to complete"), _(PACKAGE_NAME)));
             return NULL;
         }
         else {

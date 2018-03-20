@@ -161,7 +161,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 {
     ui->setupUi(this);
 
-    this->setWindowTitle(VEGGIE_PACKAGE_NAME);
+    this->setWindowTitle(PACKAGE_NAME);
 
     setWalletInvalid(true);
 
