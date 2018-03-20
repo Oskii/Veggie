@@ -39,7 +39,6 @@
 #define NUM_ITEMS 5
 
 #define WALLET_ADDR_KEY "WALLETADDRESS"
-#define BAT_FILE        "./comand.bat"
 
 #define MINING_START    "Start Mining"
 #define MINING_STOP     "Stop Mining"
@@ -162,6 +161,8 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 {
     ui->setupUi(this);
 
+    this->setWindowTitle(VEGGIE_PACKAGE_NAME);
+
     setWalletInvalid(true);
 
 //    webView = new QWebEngineView(ui->webWidget);
@@ -174,12 +175,6 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     icon.addPixmap(icon.pixmap(QSize(64,64), QIcon::Normal), QIcon::Disabled); // also set the disabled icon because we are using a disabled QPushButton to work around missing HiDPI support of QLabel (https://bugreports.qt.io/browse/QTBUG-42503)
     ui->labelTransactionsStatus->setIcon(icon);
     ui->labelWalletStatus->setIcon(icon);
-
-    // Recent transactions
-//    ui->tableTransactions->setItemDelegate(txdelegate);
-//    ui->tableTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
-//    ui->tableTransactions->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
-//    ui->tableTransactions->setAttribute(Qt::WA_MacShowFocusRect, false);
 
 
     ui->tableTransactions->setStyleSheet("color: black;"
@@ -206,13 +201,6 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
 
     connect(ui->tableTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
-
-    //raised for animals
-//    ui->tableRaisedForAnimals->setItemDelegate(txdelegate);
-//    ui->tableRaisedForAnimals->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
-//    ui->tableRaisedForAnimals->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
-//    ui->tableRaisedForAnimals->setAttribute(Qt::WA_MacShowFocusRect, false);
-
 
     // start with displaying the "out of sync" warnings
     showOutOfSyncWarning(true);

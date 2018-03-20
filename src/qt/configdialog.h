@@ -20,7 +20,7 @@ public:
     explicit ConfigDialog(QDialog *parent = nullptr);
     ~ConfigDialog();
 
-    int exec() override;
+    int exec();
     void accept() override;
     QString selectedPool();
     void showMessage(QString);
