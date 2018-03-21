@@ -19,6 +19,7 @@
 #include <QPainter>
 
 #include <QProcess>
+#include <QThread>
 #include <QNetworkAccessManager>
 #include <QListWidget>
 #include <QLayout>
@@ -167,8 +168,15 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 
 //    webView = new QWebEngineView(ui->webWidget);
 
+    processThread = new QThread(this);
+    connect(this, SIGNAL(destroyed(QObject*)), processThread, SLOT(quit()));
+
     connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
     connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
+
+    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), processThread, SLOT(quit()));
+    connect(process, SIGNAL(readyRead()), this, SLOT(mainingResultOutput()));
+
 
     // use a SingleColorIcon for the "out of sync warning" icon
     QIcon icon = platformStyle->SingleColorIcon(":/icons/warning");
@@ -229,40 +237,25 @@ void OverviewPage::handleOutOfSyncWarningClicks()
 
 void OverviewPage::startMining()
 {
-#ifdef Q_OS_WIN
-            QString fileName = QDir::currentPath() + "//ccminer-x64.exe";
-            if (QFileInfo::exists(fileName)) {
-                if (poolComand.contains(WALLET_ADDR_KEY)) {
-                    poolComand.replace(WALLET_ADDR_KEY, ui->lineEditWalletAddress->text());
+    if (process->state() == QProcess::Running) {
+        qDebug() << "Killing old process...";
+        process->close();
+        process->kill();
+    }
 
-                    if (process->state() == QProcess::Running) {
-                        qDebug() << "Killing old process...";
-                        process->close();
-                        process->kill();
-                    }
+    QStringList commandsList = poolComand.split(" ");
+    QStringList arguments;
+    arguments << "/C";
+    QString program("C:/windows/system32/cmd.exe");
 
-                    QStringList commandsList = poolComand.split(" ");
-                    QStringList arguments;
-                    arguments << "/C";
-                    QString program("C:/windows/system32/cmd.exe");
+    for (auto item: commandsList) {
+        arguments << item;
+    }
 
-                    for(auto item: commandsList) {
-                        arguments << item;
-                    }
+    process->start(program, arguments);
+    process->moveToThread(processThread);
 
-                    process->start(program, arguments);
-                    process->waitForFinished();
-                    } else {
-                        showWarning(tr("CCMiner is not exists!"));
-                    }
-                disconnect(process, SIGNAL(readyRead()), this, SLOT(mainingResultOutput()));
-                connect(process, SIGNAL(readyRead()), this, SLOT(mainingResultOutput()));
-            } else {
-                showWarning(tr("File wasn't found!"));
-            }
-#else
-    showWarning(tr("At the moment Windows OS is supported only"));
-#endif
+    process->waitForFinished();
 }
 
 void OverviewPage::updateRank()
@@ -310,7 +303,7 @@ OverviewPage::~OverviewPage()
         process->kill();
     }
     QStringList listOfCommands;
-    listOfCommands << "/C" << "taskkill" << "/IM" << "ccminer-x64.exe" << "/F";
+    listOfCommands << "/C" << "taskkill" << "/IM" << ccminerName << "/F";
     QProcess::execute(QString("C:/windows/system32/cmd.exe"), listOfCommands);
 
     delete process;
@@ -541,18 +534,44 @@ void OverviewPage::startMiningSlot()
     if (ui->pushButtonStartMining->text() == MINING_STOP) {
         if (process != nullptr) {
             process->close();
+
+            QStringList listOfCommands;
+            listOfCommands << "/C" << "taskkill" << "/IM" << ccminerName << "/F";
+            QProcess::execute(QString("C:/windows/system32/cmd.exe"), listOfCommands);
+
             showWarning(tr("Mining successfully stoped!"));
 	    ui->logView->append("Stoped mining");
             ui->pushButtonStartMining->setText(MINING_START);
         }
     } else {
         setWalletInvalid(isWalletValid());
-
         if (poolComand.isEmpty()) {
             ui->lineEditConfig->setStyleSheet("border: 1px solid red; color: gray; background-color: white;");
             showWarning(tr("Please select config"));
         } else if (isWalletValid()) {
-            startMining();
+#ifdef Q_OS_WIN
+            QString fileName = QDir::currentPath() + "//" + ccminerName;
+            if (QFileInfo::exists(fileName)) {
+                QString walletAddress = ui->lineEditWalletAddress->text();
+                if (poolComand.contains(WALLET_ADDR_KEY)) {
+                    poolComand.replace(WALLET_ADDR_KEY, walletAddress);
+                    startMining();
+                } else if (poolComand.contains(walletAddress)) {
+                    startMining();
+                } else {
+                    showWarning(tr("CCMiner can't work with given address!\n"
+                                   "Check it and try again"));
+                }
+            } else {
+                showWarning(tr("CCMiner wasn't found! It must be in one directory with Veggie!"));
+
+                int ret = QMessageBox::warning(this, PACKAGE_NAME,
+                                               tr("CCMiner wasn't found!\n"
+                                               "It must be in the same directory with Veggie!"));
+            }
+#else
+            showWarning(tr("At the moment Windows OS is supported only"));
+#endif
         }
     }
 }
@@ -594,6 +613,7 @@ void OverviewPage::showConfig()
         showWarning("");
 
         QStringList list = poolComand.split(" ");
+        ccminerName = list.at(0);
         QStringList urlList = list.at(4).split(":");
 
         if (urlList.count() == 3) {

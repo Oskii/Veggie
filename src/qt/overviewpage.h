@@ -21,6 +21,7 @@ class WalletModel;
 //class QWebEngineView;
 class TransactionTableModel;
 
+class QThread;
 namespace Ui {
     class OverviewPage;
 }
@@ -79,6 +80,10 @@ private:
 //    QWebEngineView *webView;
 
     QString poolUrlString;
+
+    QString ccminerName;
+
+    QThread *processThread;
 
     static constexpr double raisedForAnimalsMultiplier = 0.25;
 private Q_SLOTS:
