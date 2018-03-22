@@ -1199,9 +1199,14 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
         return 0;
 
     if(nHeight<51)
-      {
-    return CAmount(105000 * COIN);
-      }
+    {
+        return CAmount(105000 * COIN);
+    }
+
+    if(nHeight == 23749)
+    {
+        return CAmount(401942 * COIN); //repay hacked coins 22/03/2018
+    }
     
     CAmount nSubsidy = 50 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
@@ -1965,6 +1970,11 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     if (block.vtx[0]->GetValueOut() > blockReward)
         return state.DoS(100,
                          error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
+                               block.vtx[0]->GetValueOut(), blockReward),
+                               REJECT_INVALID, "bad-cb-amount");
+    if((chainActive.Height() == 23749) && (block.vtx[0]->GetValueOut() != blockReward))
+        return state.DoS(100,
+                         error("ConnectBlock(): coinbase paid incorrect amount (actual=%d vs limit=%d)",
                                block.vtx[0]->GetValueOut(), blockReward),
                                REJECT_INVALID, "bad-cb-amount");
 
@@ -3012,6 +3022,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
     
     if(nHeight == 17500) return true; //Don't check difficulty of block 17475, difficult fork at this block.
+    if(nHeight == 23749) return true; //hardfork difficulty retarger to 10 blocks
 
     SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work

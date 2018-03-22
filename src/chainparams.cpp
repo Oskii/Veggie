@@ -396,8 +396,6 @@ void MineGenesisBlock(CBlock &genesis)
     if (genesis.nNonce == 0) { ++genesis.nTime; }
   }
   
-  //printf("HASH IS: %s\n", UintToArith256(genesis.GetHash()).ToString().c_str());
-
   printf("Converting genesis hash to string: %s\n",genesis.ToString().c_str());	
 }
 
@@ -409,4 +407,12 @@ void SetDifficultyAdjustmentParams(int nHeight)
 
         mainParams.UpdateDifficultyAdjustmentParameters(modifiedPowTargetSpacing, modifiedPowTargetTimespan);
     }
+
+    if (nHeight >= 23749) { //Hardfork to 10 block difficulty retarget.
+        int64_t modifiedPowTargetTimespan = 60 * 100; // 100 minutes
+        int64_t modifiedPowTargetSpacing = 10 * 60;   // 10 minutes
+
+        mainParams.UpdateDifficultyAdjustmentParameters(modifiedPowTargetSpacing, modifiedPowTargetTimespan);
+
+    } 
 }
