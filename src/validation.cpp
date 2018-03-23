@@ -3014,7 +3014,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
     if(nHeight == 17500) return true; //Don't check difficulty of block 17475, difficulty fork at this block.
-    if((nHeight >= 23750)&&(nHeight < 24000)) return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
+    if((nHeight >= 23750)&&(nHeight < 23760)) return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
 
     SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work
