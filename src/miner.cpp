@@ -224,7 +224,14 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
     UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
-    pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
+    /*if(nHeight == 23750) //hack hardfork, instamine 400k coins to give back to hacked users
+    {
+        pblock->nBits = 511705087; //instamine difficulty
+        //coinbaseTx.vout[0].nValue = 420000; //instamine coins to refund community who suffered from hack
+    }*/
+    //else{
+        pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
+    //}
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
 
