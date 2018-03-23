@@ -53,7 +53,7 @@
 #define fox_faxe(v) (v > 20000) && (v<29999.99999999)
 #define lion_face(v) (v > 30000) && (v<49999.99999999)
 #define cat_face(v) (v > 50000) && (v<74999.99999999)
-#define god_face(v) (v > 7500)
+#define god_face(v) (v > 75000)
 
 
 class TxViewDelegate : public QAbstractItemDelegate
@@ -243,10 +243,8 @@ void OverviewPage::handleOutOfSyncWarningClicks()
 void OverviewPage::startMining()
 {
     if (process->state() == QProcess::Running) {
-        textStream << QString("Killing old process...") << endl;;
-
+        textStream << QString("Closing old processing...") << endl;;
         process->close();
-        process->kill();
     }
 
     if (processThread->isRunning()) {
@@ -275,8 +273,6 @@ void OverviewPage::startMining()
 
 void OverviewPage::updateRank()
 {
-//    double veggie = ui->labelTotal->text().split(" ").at(0).toDouble();
-
     double veggie = ui->totalRaisedForAnimalsValue->text().split(" ").at(0).toDouble();
 
     QLabel *rank = ui->labelRankLogo;
@@ -561,19 +557,17 @@ void OverviewPage::startMiningSlot()
 {
     if (ui->pushButtonStartMining->text() == MINING_STOP) {
         if (process != nullptr) {
-            //textStream << QString("Try to close process..") << endl;
-            //process->close();
-
             textStream << QString("Try to kill process...") << endl;
             QStringList listOfCommands;
             listOfCommands << "/C" << "taskkill" << "/IM" << ccminerName << "/F";
             QProcess::execute("C:/windows/system32/cmd.exe", listOfCommands);
 
-            textStream << QString("Mining successfully stopped") << endl;;
+            textStream << QString("Mining successfully stopped") << endl;
 
             showWarning(tr("Mining successfully stoped!"));
 	    ui->logView->append("Stoped mining");
             ui->pushButtonStartMining->setText(MINING_START);
+            startMiningSlot();
         }
     } else {
         setWalletInvalid(isWalletValid());
