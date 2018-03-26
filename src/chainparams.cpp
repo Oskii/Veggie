@@ -132,7 +132,7 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0xf3209004efc0514df1c566add7764437d66e0ffaf87cdb6dc88b2c1453ebdc22"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.push_back(CDNSSeedData("45.32.79.231" /*Carrot*/, "207.246.105.211" /*Avocado*/));
+        vSeeds.push_back(CDNSSeedData("45.32.79.230" /*Carrot*/, "207.246.105.211" /*Avocado*/));
         vSeeds.push_back(CDNSSeedData("45.77.72.77" /*Brazil Seed 1*/, "45.63.111.147" /*Brazil Seed 2*/));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); //55
@@ -396,8 +396,6 @@ void MineGenesisBlock(CBlock &genesis)
     if (genesis.nNonce == 0) { ++genesis.nTime; }
   }
   
-  //printf("HASH IS: %s\n", UintToArith256(genesis.GetHash()).ToString().c_str());
-
   printf("Converting genesis hash to string: %s\n",genesis.ToString().c_str());	
 }
 
