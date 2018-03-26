@@ -3046,9 +3046,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if(nHeight > 23749)
     {
-    	std::cout << "nHeight: " << nHeight << " --- GetBlockTime(): " << block.GetBlockTime() << std::endl;
     	if(block.GetBlockTime() < 1521813472){
-	    		std::cout << "found bad hack fork blocks" << std::endl;
 	    		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software");
     		}
     }
