@@ -3050,16 +3050,10 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if(nHeight > 23749)
     {
-<<<<<<< HEAD
-    	if(block.GetBlockTime() < 1521813472){
-	    		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software");
-    		}
-=======
     	if(block.GetBlockTime() < 1521813472)
     		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
         if(nHeight <= 23760)
             return true;
->>>>>>> origin
     }
 
     // Start enforcing BIP113 (Median Time Past) using versionbits logic.
