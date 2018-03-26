@@ -2874,7 +2874,7 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const 
 bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW, bool fCheckMerkleRoot)
 {
     // These are checks that are independent of context.
-
+    //return true;
     if (block.fChecked)
         return true;
 
@@ -3013,8 +3013,12 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev, int64_t nAdjustedTime)
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
-    if(nHeight == 17500) return true; //Don't check difficulty of block 17475, difficulty fork at this block.
-    if((nHeight >= 23750)&&(nHeight < 23760)) return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
+    if(nHeight == 17500) 
+        return true; //Don't check difficulty of block 17475, difficulty fork at this block.
+    if((nHeight >= 23750)&&(nHeight < 23760)) 
+        return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
+    if(nHeight == 23765) 
+        return true; //Don't check difficulty of block 23675, difficulty fork at this block.
 
     SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work
@@ -3046,9 +3050,16 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if(nHeight > 23749)
     {
+<<<<<<< HEAD
     	if(block.GetBlockTime() < 1521813472){
 	    		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software");
     		}
+=======
+    	if(block.GetBlockTime() < 1521813472)
+    		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
+        if(nHeight <= 23760)
+            return true;
+>>>>>>> origin
     }
 
     // Start enforcing BIP113 (Median Time Past) using versionbits logic.
