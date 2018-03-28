@@ -3048,7 +3048,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
     
-    if(nHeight > 23749)
+    if(nHeight > 23748)
     {
     	if(block.GetBlockTime() < 1522220087
             )
