@@ -3015,8 +3015,18 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
     if(nHeight == 17500) 
         return true; //Don't check difficulty of block 17475, difficulty fork at this block.
-    if((nHeight >= 23748)&&(nHeight <= 24100)) 
-        return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
+    if((nHeight >= 23748)&&(nHeight <= 24100))
+    {
+        if(block.GetBlockTime() > 1522220087) 
+        {
+            return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
+        }
+        else
+        {
+            return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
+ 
+        }
+    }
     if(nHeight == 23765)
         return true; //Don't check difficulty of block 23675, difficulty fork at this block.
 
