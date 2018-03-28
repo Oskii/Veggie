@@ -3050,7 +3050,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if(nHeight > 23749)
     {
-    	if(block.GetBlockTime() < 1521813472)
+    	if(block.GetBlockTime() < 1522213149)
     		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
         if(nHeight <= 24100)
             return true;
