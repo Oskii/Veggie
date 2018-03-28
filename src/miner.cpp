@@ -219,7 +219,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
     UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
-    if(nHeight>23749 && nHeight<=24100)
+    if(nHeight>=23748 && nHeight<=24100)
     {
         pblock->nBits = 511705087; //instamine these blocks
     }else {
