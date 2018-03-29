@@ -3051,6 +3051,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if((nHeight >= 23740)&&(nHeight <= 24100))
     {
+        std::cout << "GetBlockTime at height: " << nHeight << " = " << block.GetBlockTime << std::endl;
     	if(block.GetBlockTime() < 1522307758)
     		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
         return true;
