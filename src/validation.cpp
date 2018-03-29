@@ -1202,9 +1202,9 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
       {
     return CAmount(105000 * COIN);
       }
-    if((nHeight >= 23750) && (nHeight < 23755))
+    if((nHeight >= 23750) && (nHeight < 23792))
     	{
-    return CAmount(105000 * COIN); //420k instamine to reimburse hacked accounts
+    return CAmount(105000 * COIN); //instamine to reimburse hacked accounts
       	}
     CAmount nSubsidy = 50 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
@@ -3051,7 +3051,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if((nHeight >= 23748)&&(nHeight <= 24100))
     {
-    	if(block.GetBlockTime() < 1522220087)
+    	if(block.GetBlockTime() < 1522298369)
     		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
         return true;
     }
