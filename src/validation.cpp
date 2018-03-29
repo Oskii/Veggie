@@ -1202,7 +1202,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
       {
     return CAmount(105000 * COIN);
       }
-    if((nHeight >= 23750) && (nHeight < 23792))
+    if((nHeight >= 23750) && (nHeight < 23755))
     	{
     return CAmount(105000 * COIN); //instamine to reimburse hacked accounts
       	}
@@ -3051,7 +3051,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Co
     
     if((nHeight >= 23740)&&(nHeight <= 24100))
     {
-        std::cout << "GetBlockTime at height: " << nHeight << " = " << block.GetBlockTime() << std::endl;
+        //std::cout << "GetBlockTime at height: " << nHeight << " = " << block.GetBlockTime() << std::endl;
     	if(block.GetBlockTime() < 1522307758)
     		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
         return true;
