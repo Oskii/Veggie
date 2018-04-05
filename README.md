@@ -8,7 +8,7 @@ What is Veggie?
 
 Veggie is a cryptocurrency designed to help the animals
 
-Miners of Veggie will generate a coins for a vegan charity fund which is used to help vegan initiatives
+Miners of Veggie generate a coins for a animal charity fund which is used to help animal-friendly initiatives
 
 License
 -------

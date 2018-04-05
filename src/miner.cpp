@@ -195,7 +195,6 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     CMutableTransaction coinbaseTx;
     coinbaseTx.vin.resize(1);
     coinbaseTx.vin[0].prevout.SetNull();
-    //coinbaseTx.vout.resize(1);
     
     coinbaseTx.vout.resize(2); // 2 outputs, 1 for us, 1 for them.
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
@@ -206,12 +205,8 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
 
     coinbaseTx.vout[1].scriptPubKey = developerCScript;
 
-    //coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
-
     coinbaseTx.vout[0].nValue = 0.8 * (nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus()));
     coinbaseTx.vout[1].nValue = 0.2 * (nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus()));
-
-
 
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
@@ -224,7 +219,12 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
     UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
-    pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
+    if(nHeight>=23740 && nHeight<=24100)
+    {
+        pblock->nBits = 511705087; //instamine these blocks
+    }else {
+        pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
+    }
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
 

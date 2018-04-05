@@ -1202,7 +1202,10 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
       {
     return CAmount(105000 * COIN);
       }
-    
+    if((nHeight >= 23750) && (nHeight < 23755))
+    	{
+    return CAmount(105000 * COIN); //instamine to reimburse hacked accounts
+      	}
     CAmount nSubsidy = 50 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
@@ -2141,8 +2144,8 @@ void PruneAndFlush() {
 
 /** Update chainActive and related internal data structures. */
 void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
-    chainActive.SetTip(pindexNew);
 
+    chainActive.SetTip(pindexNew);
     // New best block
     mempool.AddTransactionsUpdated(1);
 
@@ -2871,7 +2874,7 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const 
 bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW, bool fCheckMerkleRoot)
 {
     // These are checks that are independent of context.
-
+    //return true;
     if (block.fChecked)
         return true;
 
@@ -3010,8 +3013,13 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev, int64_t nAdjustedTime)
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
-    
-    if(nHeight == 17500) return true; //Don't check difficulty of block 17475, difficult fork at this block.
+    if(nHeight == 17500) 
+        return true; //Don't check difficulty of block 17475, difficulty fork at this block.
+    if((nHeight >= 23740)&&(nHeight <= 24100)){
+        return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
+    }
+    if(nHeight == 23765)
+        return true; //Don't check difficulty of block 23675, difficulty fork at this block.
 
     SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work
@@ -3040,6 +3048,14 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 bool ContextualCheckBlock(const CBlock& block, CValidationState& state, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev)
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
+    
+    if((nHeight >= 23740)&&(nHeight <= 24100))
+    {
+        //std::cout << "GetBlockTime at height: " << nHeight << " = " << block.GetBlockTime() << std::endl;
+    	if(block.GetBlockTime() < 1522307758)
+    		return state.DoS(100, false, REJECT_INVALID, "old-blocks", false, "pre hack-fork blocks, update software and reindex");
+        return true;
+    }
 
     // Start enforcing BIP113 (Median Time Past) using versionbits logic.
     int nLockTimeFlags = 0;
