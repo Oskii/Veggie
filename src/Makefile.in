@@ -568,14 +568,15 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/addresstablemodel.cpp qt/askpassphrasedialog.cpp \
 	qt/coincontroldialog.cpp qt/coincontroltreewidget.cpp \
 	qt/editaddressdialog.cpp qt/openuridialog.cpp \
-	qt/overviewpage.cpp qt/paymentrequestplus.cpp \
-	qt/paymentserver.cpp qt/receivecoinsdialog.cpp \
-	qt/receiverequestdialog.cpp qt/recentrequeststablemodel.cpp \
-	qt/sendcoinsdialog.cpp qt/sendcoinsentry.cpp \
-	qt/signverifymessagedialog.cpp qt/transactiondesc.cpp \
-	qt/transactiondescdialog.cpp qt/transactionfilterproxy.cpp \
-	qt/transactionrecord.cpp qt/transactiontablemodel.cpp \
-	qt/transactionview.cpp qt/walletframe.cpp qt/walletmodel.cpp \
+	qt/configdialog.cpp qt/overviewpage.cpp \
+	qt/paymentrequestplus.cpp qt/paymentserver.cpp \
+	qt/receivecoinsdialog.cpp qt/receiverequestdialog.cpp \
+	qt/recentrequeststablemodel.cpp qt/sendcoinsdialog.cpp \
+	qt/sendcoinsentry.cpp qt/signverifymessagedialog.cpp \
+	qt/transactiondesc.cpp qt/transactiondescdialog.cpp \
+	qt/transactionfilterproxy.cpp qt/transactionrecord.cpp \
+	qt/transactiontablemodel.cpp qt/transactionview.cpp \
+	qt/walletframe.cpp qt/walletmodel.cpp \
 	qt/walletmodeltransaction.cpp qt/walletview.cpp \
 	qt/addressbookpage.h qt/addresstablemodel.h \
 	qt/askpassphrasedialog.h qt/bantablemodel.h \
@@ -586,12 +587,12 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/guiutil.h qt/intro.h qt/macdockiconhandler.h \
 	qt/macnotificationhandler.h qt/modaloverlay.h \
 	qt/networkstyle.h qt/notificator.h qt/openuridialog.h \
-	qt/optionsdialog.h qt/optionsmodel.h qt/overviewpage.h \
-	qt/paymentrequestplus.h qt/paymentserver.h qt/peertablemodel.h \
-	qt/platformstyle.h qt/qvalidatedlineedit.h qt/qvaluecombobox.h \
-	qt/receivecoinsdialog.h qt/receiverequestdialog.h \
-	qt/recentrequeststablemodel.h qt/rpcconsole.h \
-	qt/sendcoinsdialog.h qt/sendcoinsentry.h \
+	qt/optionsdialog.h qt/optionsmodel.h qt/configdialog.h \
+	qt/overviewpage.h qt/paymentrequestplus.h qt/paymentserver.h \
+	qt/peertablemodel.h qt/platformstyle.h qt/qvalidatedlineedit.h \
+	qt/qvaluecombobox.h qt/receivecoinsdialog.h \
+	qt/receiverequestdialog.h qt/recentrequeststablemodel.h \
+	qt/rpcconsole.h qt/sendcoinsdialog.h qt/sendcoinsentry.h \
 	qt/signverifymessagedialog.h qt/splashscreen.h \
 	qt/trafficgraphwidget.h qt/transactiondesc.h \
 	qt/transactiondescdialog.h qt/transactionfilterproxy.h \
@@ -603,7 +604,8 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/forms/editaddressdialog.ui qt/forms/helpmessagedialog.ui \
 	qt/forms/intro.ui qt/forms/modaloverlay.ui \
 	qt/forms/openuridialog.ui qt/forms/optionsdialog.ui \
-	qt/forms/overviewpage.ui qt/forms/receivecoinsdialog.ui \
+	qt/forms/configdialog.ui qt/forms/overviewpage.ui \
+	qt/forms/receivecoinsdialog.ui \
 	qt/forms/receiverequestdialog.ui qt/forms/debugwindow.ui \
 	qt/forms/sendcoinsdialog.ui qt/forms/sendcoinsentry.ui \
 	qt/forms/signverifymessagedialog.ui \
@@ -714,6 +716,7 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-coincontroltreewidget.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-editaddressdialog.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-openuridialog.$(OBJEXT) \
+@ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-configdialog.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-overviewpage.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-paymentrequestplus.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-paymentserver.$(OBJEXT) \
@@ -764,6 +767,7 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_openuridialog.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_optionsdialog.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_optionsmodel.$(OBJEXT) \
+@ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_configdialog.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_overviewpage.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_peertablemodel.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/qt_libbitcoinqt_a-moc_paymentserver.$(OBJEXT) \
@@ -2511,6 +2515,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TRUE@  qt/forms/modaloverlay.ui \
 @ENABLE_QT_TRUE@  qt/forms/openuridialog.ui \
 @ENABLE_QT_TRUE@  qt/forms/optionsdialog.ui \
+@ENABLE_QT_TRUE@  qt/forms/configdialog.ui \
 @ENABLE_QT_TRUE@  qt/forms/overviewpage.ui \
 @ENABLE_QT_TRUE@  qt/forms/receivecoinsdialog.ui \
 @ENABLE_QT_TRUE@  qt/forms/receiverequestdialog.ui \
@@ -2543,6 +2548,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TRUE@  qt/moc_openuridialog.cpp \
 @ENABLE_QT_TRUE@  qt/moc_optionsdialog.cpp \
 @ENABLE_QT_TRUE@  qt/moc_optionsmodel.cpp \
+@ENABLE_QT_TRUE@  qt/moc_configdialog.cpp \
 @ENABLE_QT_TRUE@  qt/moc_overviewpage.cpp \
 @ENABLE_QT_TRUE@  qt/moc_peertablemodel.cpp \
 @ENABLE_QT_TRUE@  qt/moc_paymentserver.cpp \
@@ -2575,6 +2581,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TRUE@  qt/bitcoin.moc \
 @ENABLE_QT_TRUE@  qt/bitcoinamountfield.moc \
 @ENABLE_QT_TRUE@  qt/intro.moc \
+@ENABLE_QT_TRUE@  qt/configdialog.moc \
 @ENABLE_QT_TRUE@  qt/overviewpage.moc \
 @ENABLE_QT_TRUE@  qt/rpcconsole.moc
 
@@ -2610,6 +2617,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TRUE@  qt/openuridialog.h \
 @ENABLE_QT_TRUE@  qt/optionsdialog.h \
 @ENABLE_QT_TRUE@  qt/optionsmodel.h \
+@ENABLE_QT_TRUE@  qt/configdialog.h \
 @ENABLE_QT_TRUE@  qt/overviewpage.h \
 @ENABLE_QT_TRUE@  qt/paymentrequestplus.h \
 @ENABLE_QT_TRUE@  qt/paymentserver.h \
@@ -2729,6 +2737,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TRUE@  qt/coincontroltreewidget.cpp \
 @ENABLE_QT_TRUE@  qt/editaddressdialog.cpp \
 @ENABLE_QT_TRUE@  qt/openuridialog.cpp \
+@ENABLE_QT_TRUE@  qt/configdialog.cpp \
 @ENABLE_QT_TRUE@  qt/overviewpage.cpp \
 @ENABLE_QT_TRUE@  qt/paymentrequestplus.cpp \
 @ENABLE_QT_TRUE@  qt/paymentserver.cpp \
@@ -3332,6 +3341,8 @@ qt/qt_libbitcoinqt_a-editaddressdialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-openuridialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
+qt/qt_libbitcoinqt_a-configdialog.$(OBJEXT): qt/$(am__dirstamp) \
+	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-overviewpage.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-paymentrequestplus.$(OBJEXT): qt/$(am__dirstamp) \
@@ -3413,6 +3424,8 @@ qt/qt_libbitcoinqt_a-moc_openuridialog.$(OBJEXT): qt/$(am__dirstamp) \
 qt/qt_libbitcoinqt_a-moc_optionsdialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_optionsmodel.$(OBJEXT): qt/$(am__dirstamp) \
+	qt/$(DEPDIR)/$(am__dirstamp)
+qt/qt_libbitcoinqt_a-moc_configdialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_overviewpage.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
@@ -4103,6 +4116,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-clientmodel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroldialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroltreewidget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-csvmodelwriter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-editaddressdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-guiutil.Po@am__quote@
@@ -4118,6 +4132,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_clientmodel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_coincontroldialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_coincontroltreewidget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_csvmodelwriter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_editaddressdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_guiutil.Po@am__quote@
@@ -7081,6 +7096,20 @@ qt/qt_libbitcoinqt_a-openuridialog.obj: qt/openuridialog.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-openuridialog.obj `if test -f 'qt/openuridialog.cpp'; then $(CYGPATH_W) 'qt/openuridialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/openuridialog.cpp'; fi`
 
+qt/qt_libbitcoinqt_a-configdialog.o: qt/configdialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-configdialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Tpo -c -o qt/qt_libbitcoinqt_a-configdialog.o `test -f 'qt/configdialog.cpp' || echo '$(srcdir)/'`qt/configdialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='qt/configdialog.cpp' object='qt/qt_libbitcoinqt_a-configdialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-configdialog.o `test -f 'qt/configdialog.cpp' || echo '$(srcdir)/'`qt/configdialog.cpp
+
+qt/qt_libbitcoinqt_a-configdialog.obj: qt/configdialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-configdialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Tpo -c -o qt/qt_libbitcoinqt_a-configdialog.obj `if test -f 'qt/configdialog.cpp'; then $(CYGPATH_W) 'qt/configdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/configdialog.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-configdialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='qt/configdialog.cpp' object='qt/qt_libbitcoinqt_a-configdialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-configdialog.obj `if test -f 'qt/configdialog.cpp'; then $(CYGPATH_W) 'qt/configdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/configdialog.cpp'; fi`
+
 qt/qt_libbitcoinqt_a-overviewpage.o: qt/overviewpage.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-overviewpage.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-overviewpage.Tpo -c -o qt/qt_libbitcoinqt_a-overviewpage.o `test -f 'qt/overviewpage.cpp' || echo '$(srcdir)/'`qt/overviewpage.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-overviewpage.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-overviewpage.Po
@@ -7654,6 +7683,20 @@ qt/qt_libbitcoinqt_a-moc_optionsmodel.obj: qt/moc_optionsmodel.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='qt/moc_optionsmodel.cpp' object='qt/qt_libbitcoinqt_a-moc_optionsmodel.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_optionsmodel.obj `if test -f 'qt/moc_optionsmodel.cpp'; then $(CYGPATH_W) 'qt/moc_optionsmodel.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_optionsmodel.cpp'; fi`
+
+qt/qt_libbitcoinqt_a-moc_configdialog.o: qt/moc_configdialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_configdialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_configdialog.o `test -f 'qt/moc_configdialog.cpp' || echo '$(srcdir)/'`qt/moc_configdialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='qt/moc_configdialog.cpp' object='qt/qt_libbitcoinqt_a-moc_configdialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_configdialog.o `test -f 'qt/moc_configdialog.cpp' || echo '$(srcdir)/'`qt/moc_configdialog.cpp
+
+qt/qt_libbitcoinqt_a-moc_configdialog.obj: qt/moc_configdialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_configdialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_configdialog.obj `if test -f 'qt/moc_configdialog.cpp'; then $(CYGPATH_W) 'qt/moc_configdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_configdialog.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_configdialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='qt/moc_configdialog.cpp' object='qt/qt_libbitcoinqt_a-moc_configdialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_configdialog.obj `if test -f 'qt/moc_configdialog.cpp'; then $(CYGPATH_W) 'qt/moc_configdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_configdialog.cpp'; fi`
 
 qt/qt_libbitcoinqt_a-moc_overviewpage.o: qt/moc_overviewpage.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_overviewpage.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_overviewpage.Tpo -c -o qt/qt_libbitcoinqt_a-moc_overviewpage.o `test -f 'qt/moc_overviewpage.cpp' || echo '$(srcdir)/'`qt/moc_overviewpage.cpp

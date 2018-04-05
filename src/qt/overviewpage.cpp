@@ -18,8 +18,43 @@
 #include <QAbstractItemDelegate>
 #include <QPainter>
 
+#include <QProcess>
+#include <QThread>
+#include <QNetworkAccessManager>
+#include <QListWidget>
+#include <QLayout>
+#include <QFile>
+#include <QFileInfo>
+#include <QDir>
+#include <QMessageBox>
+#include <QStandardItemModel>
+#include <QStandardItem>
+
+//#include <QWebEngineView>
+#include <QUrl>
+
 #define DECORATION_SIZE 54
 #define NUM_ITEMS 5
+
+#define WALLET_ADDR_KEY "WALLETADDRESS"
+
+#define MINING_START    "Start Mining"
+#define MINING_STOP     "Stop Mining"
+
+#define potato(v)   (v > 0) && (v<99.99999999)
+#define carrot(v)   (v > 100) && (v<249.99999999)
+#define earcorn(v)  (v > 250) && (v<499.99999999)
+#define avocado(v)  (v > 500) && (v<999.99999999)
+#define brocoly(v)  (v > 1000) && (v<1999.99999999)
+#define eggplant(v) (v > 2000) && (v<4999.99999999)
+#define cucumber(v) (v > 5000) && (v<9999.99999999)
+#define mushroom(v) (v > 10000) && (v<14999.99999999)
+#define pig_face(v) (v > 15000) && (v<19999.99999999)
+#define fox_faxe(v) (v > 20000) && (v<29999.99999999)
+#define lion_face(v) (v > 30000) && (v<49999.99999999)
+#define cat_face(v) (v > 50000) && (v<74999.99999999)
+#define god_face(v) (v > 75000)
+
 
 class TxViewDelegate : public QAbstractItemDelegate
 {
@@ -119,9 +154,34 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     currentWatchOnlyBalance(-1),
     currentWatchUnconfBalance(-1),
     currentWatchImmatureBalance(-1),
-    txdelegate(new TxViewDelegate(platformStyle, this))
+    txdelegate(new TxViewDelegate(platformStyle, this)),
+    process{new QProcess()},
+    logFile{new QFile("log_app.txt", this)}
 {
     ui->setupUi(this);
+
+    this->setWindowTitle(PACKAGE_NAME);
+
+    setWalletInvalid(true);
+
+//    webView = new QWebEngineView(ui->webWidget);
+
+    textStream.setDevice(logFile);
+    processThread = new QThread(this);
+    connect(this, SIGNAL(destroyed(QObject*)), processThread, SLOT(quit()));
+    connect(processThread, &QThread::started, process,[this]() {
+        process->start();
+    });
+
+    connect(process, SIGNAL(started()), this, SLOT(miningStarted()));
+    connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(miningErrorOccurred(QProcess::ProcessError)));
+
+    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), processThread, SLOT(quit()));
+    connect(process, SIGNAL(readyRead()), this, SLOT(mainingResultOutput()));
+
+
+    logFile->open(QIODevice::WriteOnly | QIODevice::Append);
+
 
     // use a SingleColorIcon for the "out of sync warning" icon
     QIcon icon = platformStyle->SingleColorIcon(":/icons/warning");
@@ -129,18 +189,44 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     ui->labelTransactionsStatus->setIcon(icon);
     ui->labelWalletStatus->setIcon(icon);
 
-    // Recent transactions
-    ui->listTransactions->setItemDelegate(txdelegate);
-    ui->listTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
-    ui->listTransactions->setMinimumHeight(NUM_ITEMS * (DECORATION_SIZE + 2));
-    ui->listTransactions->setAttribute(Qt::WA_MacShowFocusRect, false);
 
-    connect(ui->listTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
+    ui->tableTransactions->setStyleSheet("color: black;"
+                                         "background-color: transparent;"
+                                         "selection-color: white;"
+                                         "selection-background-color: grey;"
+                                         "border:none;");
+
+
+    ui->tableTransactions->verticalHeader()->hide();
+    ui->tableTransactions->setShowGrid(false);
+    ui->tableTransactions->horizontalHeader()->setVisible(false);
+
+
+    ui->tableRaisedForAnimals->setStyleSheet("color: black;"
+                                             "background-color: transparent;"
+                                             "selection-color: white;"
+                                             "selection-background-color: grey;"
+                                             "border: none");
+
+    ui->tableRaisedForAnimals->verticalHeader()->hide();
+    ui->tableRaisedForAnimals->setShowGrid(false);
+    ui->tableRaisedForAnimals->horizontalHeader()->setVisible(false);
+
+
+    connect(ui->tableTransactions, SIGNAL(clicked(QModelIndex)), this, SLOT(handleTransactionClicked(QModelIndex)));
 
     // start with displaying the "out of sync" warnings
     showOutOfSyncWarning(true);
     connect(ui->labelWalletStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
     connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this, SLOT(handleOutOfSyncWarningClicks()));
+
+    //connecting mining buttons
+    connect(ui->pushButtonStartMining, SIGNAL(pressed()), this, SLOT(startMiningSlot()));
+    connect(ui->pushButtonConfig, SIGNAL(pressed()), this, SLOT(showConfig()));
+    connect(ui->lineEditWalletAddress, SIGNAL(textChanged(const QString)), this, SLOT(walletTextChanged(const QString)));
+
+    ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: gray; background-color: white;");
+
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index)
@@ -154,8 +240,84 @@ void OverviewPage::handleOutOfSyncWarningClicks()
     Q_EMIT outOfSyncWarningClicked();
 }
 
+void OverviewPage::startMining()
+{
+    if (process->state() == QProcess::Running) {
+        textStream << QString("Closing old processing...") << endl;;
+        process->close();
+    }
+
+    if (processThread->isRunning()) {
+        textStream << QString("Quiting from thread!") << endl;;
+        processThread->quit();
+    }
+
+    QStringList commandsList = poolComand.split(" ");
+    QStringList arguments;
+    arguments << "/C";
+    QString program("C:/windows/system32/cmd.exe");
+
+    for (auto item: commandsList) {
+        arguments << item;
+    }
+
+    process->setProgram(program);
+    process->setArguments(arguments);
+    process->moveToThread(processThread);
+
+    textStream << QString("Starting new thread..") << endl;;
+
+    processThread->start();
+    process->waitForFinished();
+}
+
+void OverviewPage::updateRank()
+{
+    double veggie = ui->totalRaisedForAnimalsValue->text().split(" ").at(0).toDouble();
+
+    QLabel *rank = ui->labelRankLogo;
+
+    if (potato(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/potato"));
+    } else if (carrot(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/carrot"));
+    } else if (earcorn(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/cat-face"));
+    } else if (avocado(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/avocado"));
+    } else if (brocoly(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/broccoli"));
+    } else if (eggplant(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/eggplant"));
+    } else if (cucumber(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/cucumber"));
+    } else if (mushroom(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/mushroom"));
+    } else if (pig_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/pig-face"));
+    } else if (fox_faxe(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/fox-face"));
+    } else if (lion_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/lion-face"));
+    } else if (cat_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/cat-face"));
+    } else if (god_face(veggie)) {
+        rank->setPixmap(QPixmap(":/emoji/dog-face"));
+    }
+}
+
 OverviewPage::~OverviewPage()
 {
+//    delete webView;
+    if (process->state() == QProcess::Running) {
+    	process->close();
+        process->kill();
+    }
+    QStringList listOfCommands;
+    listOfCommands << "/C" << "taskkill" << "/IM" << ccminerName << "/F";
+    QProcess::execute("C:/windows/system32/cmd.exe", listOfCommands);
+
+    delete process;
     delete ui;
 }
 
@@ -186,6 +348,8 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     ui->labelImmature->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelImmatureText->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelWatchImmature->setVisible(showWatchOnlyImmature); // show watch-only immature balance
+
+    updateRank();
 }
 
 // show/hide watch-only labels
@@ -213,27 +377,25 @@ void OverviewPage::setClientModel(ClientModel *model)
     }
 }
 
+
 void OverviewPage::setWalletModel(WalletModel *model)
 {
     this->walletModel = model;
     if(model && model->getOptionsModel())
     {
-        // Set up transaction list
-        filter.reset(new TransactionFilterProxy());
-        filter->setSourceModel(model->getTransactionTableModel());
-        filter->setLimit(NUM_ITEMS);
-        filter->setDynamicSortFilter(true);
-        filter->setSortRole(Qt::EditRole);
-        filter->setShowInactive(false);
-        filter->sort(TransactionTableModel::Date, Qt::DescendingOrder);
+        TransactionTableModel *transactionTableModel = model->getTransactionTableModel();
 
-        ui->listTransactions->setModel(filter.get());
-        ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
+        //recent transactions
+        fillTransactionInformation(transactionTableModel);
+        //veggie raised for animal
+        fillTransactionInformation(transactionTableModel, true);
 
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(),
                    model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance());
-        connect(model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)), this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
+
+        connect(model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)),
+                this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
 
         connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
 
@@ -243,6 +405,98 @@ void OverviewPage::setWalletModel(WalletModel *model)
 
     // update the display unit, to not use the default ("VEGI")
     updateDisplayUnit();
+}
+
+/**
+ * @brief OverviewPage::fillTransactionInformation
+ * Fill transaction table and table with inforamtion about summaries raised for animals with required information.
+ * First column - icon, which describe direction of the transaction,
+ * Second - Date of the transaction
+ * Third - Amount of the transaction
+ * @param transactionTableModel
+ * @param isAnimalFunds - depends on this, set data to transaction or animal funds table
+ */
+void OverviewPage::fillTransactionInformation(TransactionTableModel * const transactionTableModel, bool isAnimalFunds)
+{
+    QTableView *currentTableView = nullptr;
+    float amountMultiplier = 1.0f;
+
+    if (isAnimalFunds) {
+        amountMultiplier *= raisedForAnimalsMultiplier;
+        currentTableView = ui->tableRaisedForAnimals;
+    } else {
+        currentTableView = ui->tableTransactions;
+    }
+
+    int currentRow = 0;
+    float totalValue = 0.0f;
+
+    QStandardItemModel* modelStandard = new QStandardItemModel(0);
+    modelStandard->setHorizontalHeaderItem(0, new QStandardItem(""));
+    modelStandard->setHorizontalHeaderItem(1, new QStandardItem("Date"));
+    modelStandard->setHorizontalHeaderItem(2, new QStandardItem("Amount"));
+
+    QModelIndex topLeft = transactionTableModel->index(0,0);
+
+    for (int i(0); i < transactionTableModel->rowCount(topLeft); ++i) {
+        QModelIndex modelIndex = transactionTableModel->index(i, 4);//4 - for icon
+
+        //get data from model
+        QIcon iconByIndex = qvariant_cast<QIcon>(modelIndex.data(TransactionTableModel::WatchonlyDecorationRole));
+        //QDateTime dateTimeByIndex = modelIndex.data(TransactionTableModel::DateRole).toDateTime();
+        QString dateTimeByIndex = modelIndex.data(TransactionTableModel::DateRole).toString();
+        float amountByIndex = modelIndex.data(TransactionTableModel::AmountRole).toFloat() / 100000000.0f;
+
+        float currentValue = amountByIndex * amountMultiplier;
+        QString stringMulptilpliedValue;
+        stringMulptilpliedValue.setNum(currentValue, 'f');
+
+        if (currentValue >= 0.0f) {
+            stringMulptilpliedValue = "+" + stringMulptilpliedValue;
+            totalValue += currentValue;
+        } else {
+            //amount for animal can't be negative
+            if (isAnimalFunds) {
+                continue;
+            }
+        }
+        stringMulptilpliedValue += " VEGI";
+
+        QStandardItem *amount = new QStandardItem(stringMulptilpliedValue);
+        QStandardItem *date = new QStandardItem(dateTimeByIndex);
+        QStandardItem *icon = new QStandardItem();
+        icon->setData(QVariant(modelIndex.data(TransactionTableModel::RawDecorationRole)), Qt::DecorationRole);
+
+        if (currentValue < 0.0f) {
+            amount->setForeground(QBrush(Qt::red));
+        }
+        modelStandard->setItem(currentRow, 0, icon);
+        modelStandard->setItem(currentRow, 1, date);
+        modelStandard->setItem(currentRow, 2, amount);
+
+        ++currentRow;
+    }
+
+    // Set up transaction list
+//    filter.reset(new TransactionFilterProxy());
+//    filter->setSourceModel(modelStandard);
+//    filter->setLimit(NUM_ITEMS);
+//    filter->setDynamicSortFilter(true);
+//    filter->setSortRole(Qt::EditRole);
+//    filter->setShowInactive(false);
+//    filter->sort(TransactionTableModel::DateRole, Qt::DescendingOrder);
+
+    currentTableView->setModel(modelStandard);
+    currentTableView->resizeRowsToContents();
+    currentTableView->resizeColumnsToContents();
+
+    //set raised for animals total, if neeeded
+    if (isAnimalFunds) {
+        QString totalMultipliedValue;
+        totalMultipliedValue.setNum(totalValue, 'f');
+        totalMultipliedValue += " VEGI";
+        ui->totalRaisedForAnimalsValue->setText(totalMultipliedValue);
+    }
 }
 
 void OverviewPage::updateDisplayUnit()
@@ -256,7 +510,8 @@ void OverviewPage::updateDisplayUnit()
         // Update txdelegate->unit with the current unit
         txdelegate->unit = walletModel->getOptionsModel()->getDisplayUnit();
 
-        ui->listTransactions->update();
+        ui->tableTransactions->update();
+        //ui->listTransactions->update();
     }
 }
 
@@ -270,4 +525,176 @@ void OverviewPage::showOutOfSyncWarning(bool fShow)
 {
     ui->labelWalletStatus->setVisible(fShow);
     ui->labelTransactionsStatus->setVisible(fShow);
+}
+
+bool OverviewPage::isWalletValid()
+{
+    return !ui->lineEditWalletAddress->text().isEmpty();
+}
+
+void OverviewPage::setWalletInvalid(bool isValid)
+{
+    if (isValid) {
+        showWarning("");
+        ui->lineEditWalletAddress->setStyleSheet("border: 1px solid gray");
+    } else {
+        showWarning(tr("Please enter your wallet"));
+        ui->lineEditWalletAddress->setStyleSheet("border: 1px solid red");
+    }
+}
+
+void OverviewPage::showWarning(QString message)
+{
+    ui->labelMessage->setText(message);
+}
+
+/**
+ * @brief OverviewPage::startMiningSlot
+ * start or stop maining depends on current state.
+ * Activates after pressing "Start maining/Stop Maining button"
+ */
+void OverviewPage::startMiningSlot()
+{
+    if (ui->pushButtonStartMining->text() == MINING_STOP) {
+        if (process != nullptr) {
+            textStream << QString("Try to kill process...") << endl;
+            QStringList listOfCommands;
+            listOfCommands << "/C" << "taskkill" << "/IM" << ccminerName << "/F";
+            QProcess::execute("C:/windows/system32/cmd.exe", listOfCommands);
+
+            textStream << QString("Mining successfully stopped") << endl;
+
+            showWarning(tr("Mining successfully stoped!"));
+	    ui->logView->append("Stoped mining");
+            ui->pushButtonStartMining->setText(MINING_START);
+            startMiningSlot();
+        }
+    } else {
+        setWalletInvalid(isWalletValid());
+        if (poolComand.isEmpty()) {
+            ui->lineEditConfig->setStyleSheet("border: 1px solid red; color: gray; background-color: white;");
+            showWarning(tr("Please select config"));
+        } else if (isWalletValid()) {
+#ifdef Q_OS_WIN
+            QString fileName = QDir::currentPath() + "//" + ccminerName;
+            if (QFileInfo::exists(fileName)) {
+                QString walletAddress = ui->lineEditWalletAddress->text();
+                if (poolComand.contains(WALLET_ADDR_KEY)) {
+                    poolComand.replace(WALLET_ADDR_KEY, walletAddress);
+                    startMining();
+                    textStream << QString("Replacing wallet address") << endl;
+
+                } else if (poolComand.contains(walletAddress)) {
+                    startMining();
+                    textStream << QString("Use exists wallet address") << endl;
+
+                } else {
+                    showWarning(tr("CCMiner can't work with given address!\n"
+                                   "Check it and try again"));
+                }
+            } else {
+                showWarning(tr("CCMiner wasn't found! It must be in one directory with Veggie!"));
+
+                int ret = QMessageBox::warning(this, PACKAGE_NAME,
+                                               tr("CCMiner wasn't found!\n"
+                                               "It must be in the same directory with Veggie!"));
+            }
+#else
+            showWarning(tr("At the moment Windows OS is supported only"));
+#endif
+        }
+    }
+}
+/**
+ * @brief OverviewPage::mainingResultOutput
+ * Insert information about maining into console log
+ */
+void OverviewPage::mainingResultOutput()
+{
+    qDebug() << "Process output:";
+    QByteArray output = process->readAllStandardOutput();
+    QByteArray error = process->readAllStandardError();
+   // process->close();
+
+    latestMiningOutputDate = QDateTime::currentDateTime();
+    if (!output.isEmpty()) {
+	ui->logView->append(output);
+        qDebug() << output;
+
+    }
+    if (!error.isEmpty()) {
+	 ui->logView->append(error);
+         qDebug() << "Error Message:";
+         qDebug() << error;
+    }
+}
+
+void OverviewPage::showConfig()
+{
+    if (configDialog.exec() == QDialog::Accepted) {
+        poolComand = configDialog.selectedPool();
+        showWarning("");
+
+        QStringList list = poolComand.split(" ");
+        ccminerName = list.at(0);
+        QStringList urlList = list.at(4).split(":");
+
+        if (urlList.count() == 3) {
+            QString lTmp = urlList.at(1);
+            QString urlString;
+            urlString.append("http://").append(lTmp.remove(0, 2));
+//            webView->load(QUrl(urlString));
+//            webView->show();
+        }
+
+        ui->lineEditConfig->setText(poolComand);
+        ui->lineEditConfig->setStyleSheet("border: 1px solid gray; color: black; background-color: white;");
+    }
+}
+
+void OverviewPage::walletTextChanged(const QString &arg1)
+{
+    setWalletInvalid(isWalletValid());
+}
+
+bool OverviewPage::fileExists(QString path) {
+    QFileInfo file(path);
+    // check if file exists and if yes: Is it really a file and no directory?
+    if (file.exists() && file.isFile()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void OverviewPage::miningStarted()
+{
+    showWarning(tr("Mining successfully started!"));
+    ui->pushButtonStartMining->setText(MINING_STOP);
+}
+
+void OverviewPage::miningErrorOccurred(QProcess::ProcessError err)
+{
+    switch(err) {
+    case QProcess::FailedToStart:
+        showWarning(tr("Script file not found, resource error"));
+        break;
+    case QProcess::Crashed:
+        showWarning(tr("Ccminer crashed"));
+        break;
+    case QProcess::Timedout:
+        showWarning(tr("Ccminer timedout"));
+        break;
+    case QProcess::ReadError:
+        showWarning(tr("Read error"));
+        break;
+    case QProcess::WriteError:
+        showWarning(tr("Write error"));
+        break;
+    case QProcess::UnknownError:
+        showWarning(tr("Unknown error"));
+        break;
+    }
+
+    ui->pushButtonStartMining->setText("Start Mining");
 }
