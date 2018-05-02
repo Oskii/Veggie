@@ -600,7 +600,7 @@ void OverviewPage::startMiningSlot()
                                                "It must be in the same directory with Veggie!"));
             }
 #else
-            showWarning(tr("At the moment Windows OS is supported only"));
+            showWarning(tr("Pool mining with Veggie-qt is only supported on Windows OS currently"));
 #endif
         }
     }
