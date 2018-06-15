@@ -18,11 +18,10 @@
 #define CLIENT_VERSION_MAJOR 0
 
 /* Minor version */
-
-#define CLIENT_VERSION_MINOR 6
+#define CLIENT_VERSION_MINOR 1
 
 /* Build revision */
-#define CLIENT_VERSION_REVISION 0
+#define CLIENT_VERSION_REVISION 1
 
 /* Copyright holder(s) before %s replacement */
 #define COPYRIGHT_HOLDERS "The %s developers"
@@ -320,9 +319,7 @@
 #define PACKAGE_NAME "Veggie"
 
 /* Define to the full name and version of this package. */
-
-#define PACKAGE_STRING "Veggie 0.1.6"
-
+#define PACKAGE_STRING "Veggie 0.1.7"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "Veggie"
@@ -331,8 +328,7 @@
 #define PACKAGE_URL "https://Veggie.org/"
 
 /* Define to the version of this package. */
-
-#define PACKAGE_VERSION "0.1.6"
+#define PACKAGE_VERSION "0.1.7"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
@@ -360,7 +356,7 @@
 #define USE_DBUS 1
 
 /* Define if QR support should be compiled in */
-#define USE_QRCODE 1
+/* #undef USE_QRCODE */
 
 /* UPnP support not compiled if undefined, otherwise value (0 or 1) determines
    default state */

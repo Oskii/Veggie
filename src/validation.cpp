@@ -3020,6 +3020,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     }
     if(nHeight == 23765)
         return true; //Don't check difficulty of block 23675, difficulty fork at this block.
+    if((nHeight >= 28400) && (nHeight <=28405))
+        return true; //Difficulty changeover hardfork retarget
 
     SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work

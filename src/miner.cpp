@@ -222,6 +222,9 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     if(nHeight>=23740 && nHeight<=24100)
     {
         pblock->nBits = 511705087; //instamine these blocks
+
+    }else if (nHeight >= 28400 && nHeight <=28405){
+        pblock->nBits = 511705087; //instamine 5 blocks for difficulty changeover
     }else {
         pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
     }
