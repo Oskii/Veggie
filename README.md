@@ -1,20 +1,24 @@
-Veggie
-============
+# :tomato: :sweet_potato: Welcome to the Official VeggieCoin Wiki :corn: :eggplant:
 
-https://Veggiecoin.io
+### Quick links:
 
-What is Veggie?
----------------------
+- [What We Are All About.](/our-goal/Our-Goal.md) :apple:
 
-Veggie is a cryptocurrency designed to help the animals
+- [Official VeggieCoin Block Explorer.](http://explorer.veggiecoin.io/) :strawberry:
 
-Miners of Veggie generate a coins for a animal charity fund which is used to help animal-friendly initiatives
+- [Getting Started Guide.](/getting_started/Getting_Started.md) :peach: 
 
-License
--------
+- [Frequently Asked Questions.](/faq/Frequently-Asked-Questions.md) :pear:
 
-Veggie is released under the terms of the MIT license. See [COPYING](COPYING) for more
-information or see https://opensource.org/licenses/MIT.
+- [VeggieCoin Website.](https://www.veggiecoin.io/) :watermelon:
+
+- [VeggieCoin Whitepaper.](https://www.veggiecoin.io/VeggieWhitepaper.pdf) :green_apple:
+
+### Want to see where VeggieCoin is being used?
+
+- [Visit Our Youtube Channel To See Animals Being Helped!](https://www.youtube.com/channel/UCJTLtEFvlOOjlBs3EnDD3DA) :tv:
+
+- [Come Chat With Us Live In Our Official Discord.](https://discord.gg/u5ynzSA) :satellite:
 
 Credits
 -------
