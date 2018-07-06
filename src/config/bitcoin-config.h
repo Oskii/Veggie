@@ -18,7 +18,7 @@
 #define CLIENT_VERSION_MAJOR 0
 
 /* Minor version */
-#define CLIENT_VERSION_MINOR 1
+#define CLIENT_VERSION_MINOR 7
 
 /* Build revision */
 #define CLIENT_VERSION_REVISION 1
@@ -313,13 +313,13 @@
 #define LT_OBJDIR ".libs/"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "https://github.com/bitcoin/bitcoin/issues"
+#define PACKAGE_BUGREPORT "https://github.com/oskii/veggie/issues"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "Veggie"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Veggie 0.1.7"
+#define PACKAGE_STRING "Veggie 0.2.0"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "Veggie"
@@ -328,7 +328,7 @@
 #define PACKAGE_URL "https://Veggie.org/"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1.7"
+#define PACKAGE_VERSION "0.2.0"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
@@ -356,7 +356,7 @@
 #define USE_DBUS 1
 
 /* Define if QR support should be compiled in */
-/* #undef USE_QRCODE */
+#define USE_QRCODE 1
 
 /* UPnP support not compiled if undefined, otherwise value (0 or 1) determines
    default state */
