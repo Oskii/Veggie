@@ -3015,14 +3015,15 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
     if(nHeight == 17500) 
         return true; //Don't check difficulty of block 17475, difficulty fork at this block.
-    if((nHeight >= 23740)&&(nHeight <= 24100)){
-        return true; //hardfork block with reward of 420k coins to give back to hacked accounts 
-    }
+    if((nHeight >= 23740)&&(nHeight <= 24100))
+        return true; //Hacked coins retrieval hardfork and rollback 
     if(nHeight == 23765)
-        return true; //Don't check difficulty of block 23675, difficulty fork at this block.
+        return true; //Changeover block
     if((nHeight >= 28400) && (nHeight <=28405))
         return true; //Difficulty changeover hardfork retarget
-
+    if (nHeight >= 28578 && nHeight <= 28593)
+        return true; //DGW hardfork retarget, 5 instamine blocks
+    
     SetDifficultyAdjustmentParams(nHeight);
     // Check proof of work
     if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams))
